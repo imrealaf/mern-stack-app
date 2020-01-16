@@ -1,17 +1,18 @@
-export const APP_NAME = "MERN stack boilerplate";
+export default {
+  APP_NAME: "MERN stack boilerplate",
+  API_ROOT: "/api",
 
-export const API_ROOT = "/api";
+  PORT: 5000,
+  CLIENT_PORT: 3000,
 
-export const PORT = 5000;
-export const CLIENT_PORT = 3000;
+  AUTH_MIN_PASSWORD_LENGTH: 6,
+  AUTH_VERIFY_TOKEN_LENGTH: 16,
+  AUTH_ADMIN_TOKEN_LENGTH: 24,
 
-export const AUTH_MIN_PASSWORD_LENGTH = 6;
-export const AUTH_VERIFY_TOKEN_LENGTH = 16;
-export const AUTH_ADMIN_TOKEN_LENGTH = 24;
+  JWT_EXPIRY: "8h",
 
-export const JWT_EXPIRY = "8h";
+  EMAIL_FROM_EMAIL: "no-reply@something.com",
+  EMAIL_FROM_NAME: "MERN stack boilerplate Team",
 
-export const EMAIL_FROM_EMAIL = "no-reply@something.com";
-export const EMAIL_FROM_NAME = "MERN stack boilerplate Team";
-
-export const AUTH_REQUIRE_USER_VERIFY = true;
+  AUTH_REQUIRE_USER_VERIFY: true
+};

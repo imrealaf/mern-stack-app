@@ -1,8 +1,8 @@
 import dotenv from "dotenv-flow";
 
-import * as defaults from "./defaults";
+import defaults from "./defaults";
 
-export type EnvVariable =
+type EnvVariable =
   | "PORT"
   | "NODE_ENV"
   | "DEFAULT_PORT"

@@ -1,22 +1,27 @@
 import mongoose from "mongoose";
 
-import config from "../../config/mongo.config";
 import env from "../../env";
+import { config, IDatabaseConfig } from "./db.config";
 
-export interface IDBService {
+export interface IDatabaseService {
+  config: IDatabaseConfig;
   init(): Promise<void>;
   connect(): Promise<typeof mongoose>;
   onConnectionError(message: string): void;
 }
 
-class DbService implements IDBService {
+const DB_VENDOR = "MongoDB";
+
+class DatabaseService implements IDatabaseService {
+  public config: IDatabaseConfig = config;
+
   public async init() {
     /**
      *  Try to connect to DB ..
      */
     try {
       await this.connect();
-      console.log("MongoDB connected..");
+      console.log(`Database [${DB_VENDOR}] connected..`);
 
       /**
        *  Connection error ..
@@ -27,7 +32,7 @@ class DbService implements IDBService {
   }
 
   public connect() {
-    return mongoose.connect(env.get("MONGO_URI"), config);
+    return mongoose.connect(env.get("MONGO_URI"), this.config);
   }
 
   public onConnectionError(message: string) {
@@ -36,4 +41,4 @@ class DbService implements IDBService {
   }
 }
 
-export const dbService = new DbService();
+export const dbService = new DatabaseService();

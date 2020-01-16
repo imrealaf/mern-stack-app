@@ -7,7 +7,7 @@ import applyMiddleware from "./middleware";
 import initRoutes from "./routes";
 import initServer from "./server";
 import { authService } from "./services/auth";
-import { dbService } from "./services/db";
+import { dbService } from "./services/database";
 
 export const initApp = (): Application => {
   /**

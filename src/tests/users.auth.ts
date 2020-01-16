@@ -4,7 +4,7 @@ import request from "supertest";
 
 import env from "../env";
 import { User } from "../models";
-import { dbService } from "../services/db";
+import { dbService } from "../services/database";
 
 const userCreds = {
   email: "someemail@something.com",
