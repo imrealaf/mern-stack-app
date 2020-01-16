@@ -1,0 +1,66 @@
+.navigation {
+  .navbar-brand {
+    font-weight: 300;
+
+    .is-admin-page & {
+      @include media-breakpoint-down(md) {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @include media-breakpoint-down(xs) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .navbar-toggler {
+    border: none;
+    position: absolute;
+    right: 10px;
+
+    .is-admin-page & {
+      right: initial;
+      left: 10px;
+      display: none;
+
+      @include media-breakpoint-down(md) {
+        display: inline-block;
+      }
+    }
+  }
+
+  .nav-toggle {
+    padding: 0.3rem;
+    display: inline-block;
+    cursor: pointer;
+
+    &.nav-toggle-right,
+    &.nav-toggle-left {
+      position: absolute;
+    }
+
+    &.nav-toggle-right {
+      right: 10px;
+    }
+
+    &.nav-toggle-left {
+      left: 10px;
+    }
+  }
+
+  .nav-link {
+    .fa-xs {
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  &.navigation-shadow {
+    box-shadow: 0 0 $grid-gutter-width/2 rgba(0, 0, 0, 0.3);
+  }
+}
+
+.navbar-is-fixed {
+  padding-top: 56px;
+}

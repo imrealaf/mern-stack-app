@@ -1,0 +1,352 @@
+import crypto from "crypto";
+import { Request, Response } from "express";
+import { validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+
+import { env } from "../env";
+import messages from "../messages/auth.messages";
+// import authMessages from "../messages/users.messages";
+import { Token, User } from "../models";
+import { IAuthRequest } from "../services/auth";
+import { getClientBase } from "../utils";
+import emailController from "./email.controller";
+
+/**
+ *  Controller interface
+ */
+interface IAuthController {
+  getCurrentUser(req: IAuthRequest, res: Response): Promise<Response>;
+  loginWithEmail(req: Request, res: Response): Promise<Response>;
+  verifyUser(req: Request, res: Response): Promise<Response>;
+  resendVerify(req: Request, res: Response): Promise<Response>;
+  loginWithProviderSuccess(req: Request, res: Response): Promise<Response>;
+  loginWithProviderFail(req: Request, res: Response): Promise<void>;
+}
+
+/**
+ *  Controller class
+ */
+class AuthController implements IAuthController {
+  /**
+   *  Get current user
+   *
+   *  @method GET
+   *  @route  /auth
+   *  @access public
+   */
+  public async getCurrentUser(req: IAuthRequest, res: Response) {
+    try {
+      const user = await User.findById(req.user.id).select("-password");
+      return res.json(user);
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).send(messages.error500);
+    }
+  }
+
+  /**
+   *  Login with email/password
+   *
+   *  @method POST
+   *  @route  /auth/email
+   *  @access public
+   */
+  public async loginWithEmail(req: Request, res: Response) {
+    /**
+     *  Get validation errors
+     */
+    const errors = validationResult(req);
+
+    /**
+     *  If errors found, return 404
+     */
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array()[0].msg });
+    }
+
+    /**
+     *  Destructure data
+     */
+    const { email, password } = req.body;
+
+    try {
+      const user = await User.findOne({ email });
+
+      /**
+       *  If user not found
+       */
+      if (!user) {
+        return res.status(400).json({ message: messages.error400Auth });
+      }
+
+      /**
+       *  Compare password
+       */
+      const isMatch = await user.comparePassword(password);
+
+      /**
+       *  If password doesn't mamtch
+       */
+      if (!isMatch) {
+        return res.status(400).json({ message: messages.error400Auth });
+      }
+
+      /**
+       *  Check if user is verified
+       */
+      if (env("REQUIRE_USER_VERIFY") && !user.emailIsVerified) {
+        return res.status(400).json({ message: messages.email.verify });
+      }
+
+      /**
+       *  If admin, perform special check ..
+       */
+      if (user.role === "admin" && user.adminSecret) {
+        // Find token
+        const foundToken = await Token.findOne({
+          token: user.adminSecret
+        });
+
+        // If no token found ..
+        if (!foundToken) {
+          return res.status(404).json({
+            message: messages.error401
+          });
+        }
+
+        // Try to find user
+        const foundUser = await User.findById(foundToken.userId);
+
+        // No user found for the token ..
+        if (!foundUser) {
+          return res.status(404).json({ message: messages.error401 });
+        }
+
+        /**
+         *  Generate special admin JWT ..
+         */
+        jwt.sign(
+          // Payload
+          {
+            user: {
+              id: user._id,
+              adminSecret: user.adminSecret
+            }
+          },
+
+          // Secret
+          env("JWT_SECRET"),
+
+          // Expiration
+          { expiresIn: env("JWT_EXPIRY") },
+
+          // Callback
+          (err, token) => {
+            if (err) {
+              throw err;
+            }
+            return res.json({ token, isAdmin: true });
+          }
+        );
+
+        /**
+         *  If regular login ..
+         */
+      } else {
+        jwt.sign(
+          // Payload
+          {
+            user: {
+              id: user._id
+            }
+          },
+
+          // Secret
+          env("JWT_SECRET"),
+
+          // Expiration
+          { expiresIn: env("JWT_EXPIRY") },
+
+          // Callback
+          (err, token) => {
+            if (err) {
+              throw err;
+            }
+            return res.json({ token, isAdmin: false });
+          }
+        );
+      }
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send(messages.error500);
+    }
+  }
+
+  /**
+   *  Verify user
+   *
+   *  @method POST
+   *  @route  /auth/verify
+   *  @access public
+   */
+  public async verifyUser(req: Request, res: Response) {
+    /**
+     *  Get validation errors
+     */
+    const errors = validationResult(req);
+
+    /**
+     *  If errors found, return 404
+     */
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array()[0].msg });
+    }
+
+    /**
+     *  Destructure data from request body
+     */
+    const { token } = req.body;
+
+    try {
+      // Find token
+      const foundToken = await Token.findOne({ token });
+
+      // If no token found ..
+      if (!foundToken) {
+        return res.status(404).json({
+          message: messages.error404("token")
+        });
+      }
+
+      // Try to find user
+      const user = await User.findById(foundToken.userId);
+
+      // No user found for the token ..
+      if (!user) {
+        return res.status(404).json({ message: messages.verify.notFound });
+      }
+
+      // If user is already verified ..
+      if (user.emailIsVerified) {
+        return res.status(400).json({
+          message: messages.verify.alreadyVerified
+        });
+      }
+
+      user.emailIsVerified = true;
+      await user.save();
+
+      res.json({ message: messages.verify.verifySuccess });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send(messages.error500);
+    }
+  }
+
+  /**
+   *  Resend verification token
+   *
+   *  @method POST
+   *  @route  /auth/resend-verify
+   *  @access public
+   */
+  public async resendVerify(req: Request, res: Response) {
+    // Get errors array
+    const errors = validationResult(req);
+
+    // If errors, send 400 ..
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array()[0].msg });
+    }
+
+    // Destructure data
+    const { email } = req.body;
+
+    try {
+      // Find token
+      const user = await User.findOne({ email });
+
+      // If no user found ..
+      if (!user) {
+        return res.status(404).json({
+          message: messages.resendVerify.notFound
+        });
+      }
+
+      // Delete all previous token
+      await Token.findOneAndDelete({ userId: user._id });
+
+      // Create & save new verification token
+      const token = new Token({
+        userId: user._id,
+        token: crypto
+          .randomBytes(env("AUTH_VERIFY_TOKEN_LENGTH"))
+          .toString("hex")
+      });
+      await token.save();
+
+      // Send verification email
+      await emailController.sendVerificationEmail(req, user, token.token);
+
+      // Return token
+      return res.json({ verifyToken: token.token });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send(messages.error500);
+    }
+  }
+
+  /**
+   *  Login with Provider: Success
+   *
+   *  @method GET
+   *  @route  /{provider}/callback
+   *  @access public
+   */
+  public async loginWithProviderSuccess(req: Request, res: Response) {
+    const { user } = req as any;
+
+    /**
+     *  Login success, generate JWT and send back
+     */
+    try {
+      jwt.sign(
+        // Payload
+        {
+          user: {
+            id: user._id
+          }
+        },
+
+        // Secret
+        env("JWT_SECRET"),
+
+        // Expiration
+        { expiresIn: env("JWT_EXPIRY") },
+
+        // Callback
+        (err, token) => {
+          if (err) {
+            throw err;
+          }
+          return res.redirect(`${getClientBase()}/auth/success/${token}`);
+        }
+      );
+    } catch (error) {
+      return res.send(500);
+    }
+  }
+
+  /**
+   *  Login with Provider: Success
+   *
+   *  @method GET
+   *  @route  /provider/fail
+   *  @access public
+   */
+  public async loginWithProviderFail(req: Request, res: Response) {
+    return res.redirect(`${getClientBase()}/login?status=fail`);
+  }
+}
+
+export default new AuthController();

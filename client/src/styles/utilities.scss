@@ -1,0 +1,35 @@
+// Backgrounds
+@each $color, $value in $grays {
+  @include bg-variant(".bg-gray-#{$color}", $value, true);
+}
+
+.bg-black {
+  background: $black !important;
+}
+
+// Text
+.lh-1 {
+  line-height: 1 !important;
+}
+
+.text-lg {
+  font-size: 1.2rem !important;
+}
+
+.text-sm {
+  font-size: 0.8rem !important;
+}
+
+.text-xs {
+  font-size: 0.6rem !important;
+}
+
+// Font
+.font-light {
+  font-weight: 300 !important;
+}
+
+// Images
+.img-circle {
+  border-radius: 50% !important;
+}

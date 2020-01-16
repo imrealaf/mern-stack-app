@@ -1,0 +1,25 @@
+.is-admin-page {
+  #main-nav {
+    a {
+      color: $gray-100;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .navigation {
+      z-index: 1035;
+    }
+
+    #main-nav {
+      z-index: 1030;
+
+      @include media-breakpoint-up(md) {
+        top: 56px;
+      }
+    }
+
+    main {
+      margin-left: 300px;
+    }
+  }
+}
