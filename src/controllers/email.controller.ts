@@ -1,9 +1,9 @@
 import { Request } from "express";
 
-import env from "../env";
+import env from "../lib/env";
+import { getBaseUrl } from "../lib/utils";
 import { IUser } from "../models/user.model";
 import { IMailService, MailService } from "../services/email";
-import { getBaseUrl } from "../utils";
 
 interface IEmailController {
   sendWelcomeEmail(req: Request, user: IUser): any;

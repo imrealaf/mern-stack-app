@@ -1,7 +1,7 @@
 import { Application } from "express";
 import http, { Server } from "http";
 
-import env from "./env";
+import env from "./lib/env";
 
 export default (app: Application) => {
   /**
@@ -20,9 +20,11 @@ export default (app: Application) => {
   server.listen(port, (): void => {
     if (env.get("NODE_ENV") !== "test") {
       console.log(
-        `Server is running on port ${port} in ${env.get(
-          "NODE_ENV"
-        )} mode for Process Id ${process.pid}`
+        `Server is running${
+          env.get("IS_SSL") ? " with SSL" : ""
+        } on port ${port} in ${env.get("NODE_ENV")} mode for Process Id ${
+          process.pid
+        }`
       );
     }
   });

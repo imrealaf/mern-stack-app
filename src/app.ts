@@ -1,9 +1,10 @@
 import express, { Application } from "express";
-import env from "./env";
+import env from "./lib/env";
 
 env.init();
 
-import middleware from "./middleware";
+import middleware from "./lib/middleware";
+import { middlewaresToLoad } from "./middlewares";
 import initRoutes from "./routes";
 import initServer from "./server";
 import { AuthService } from "./services/authentication";
@@ -14,6 +15,11 @@ export const initApp = (): Application => {
    *  Create express app
    */
   const app: Application = express();
+
+  /**
+   *  Proxy settings to account for reverse-proxy environment
+   */
+  app.set("trust proxy", 1);
 
   /**
    *  Init database (if not in test env)
@@ -28,6 +34,7 @@ export const initApp = (): Application => {
   /**
    *  Apply middleware
    */
+  middleware.load(middlewaresToLoad);
   middleware.apply(app);
 
   /**

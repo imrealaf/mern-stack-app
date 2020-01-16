@@ -1,12 +1,8 @@
 import { Router } from "express";
 
 import controller from "../controllers/users.controller";
+import validation from "../lib/validation";
 import { AuthService } from "../services/authentication";
-import {
-  validateCreateUser,
-  validateMakeAdmin,
-  validateUpdateUserProfile
-} from "../validators/users.validator";
 
 const router: Router = Router();
 
@@ -35,7 +31,7 @@ router.get("/:id", AuthService.middleware, controller.getById);
  *  @route  /api/users
  *  @access private
  */
-router.post("/", validateCreateUser, controller.create);
+router.post("/", validation.use("users_create"), controller.create);
 
 /**
  *  Update current user
@@ -47,7 +43,7 @@ router.post("/", validateCreateUser, controller.create);
 router.put(
   "/",
   AuthService.middleware,
-  validateUpdateUserProfile,
+  validation.use("users_update"),
   controller.update
 );
 
@@ -58,6 +54,10 @@ router.put(
  *  @route  /api/users/admin/:id
  *  @access public
  */
-router.put("/admin/:id", validateMakeAdmin, controller.makeAdmin);
+router.put(
+  "/admin/:id",
+  validation.use("users_make_admin"),
+  controller.makeAdmin
+);
 
 export default router;

@@ -2,12 +2,8 @@ import { Router } from "express";
 import passport from "passport";
 
 import controller from "../controllers/auth.controller";
+import validation from "../lib/validation";
 import { AuthService } from "../services/authentication";
-import {
-  validateLogin,
-  validateResendVerify,
-  validateVerify
-} from "../validators/auth.validator";
 
 const router: Router = Router();
 
@@ -27,7 +23,7 @@ router.get("/", AuthService.middleware, controller.getCurrentUser);
  *  @route  /auth/email
  *  @access public
  */
-router.post("/email", validateLogin, controller.loginWithEmail);
+router.post("/email", validation.use("auth_login"), controller.loginWithEmail);
 
 /**
  *  Verify user
@@ -36,7 +32,7 @@ router.post("/email", validateLogin, controller.loginWithEmail);
  *  @route  /api/users/verify/:token
  *  @access public
  */
-router.post("/verify", validateVerify, controller.verifyUser);
+router.post("/verify", validation.use("auth_verify"), controller.verifyUser);
 
 /**
  *  Resend verification token
@@ -45,7 +41,11 @@ router.post("/verify", validateVerify, controller.verifyUser);
  *  @route  /api/users/resend-verify
  *  @access public
  */
-router.post("/resend-verify", validateResendVerify, controller.resendVerify);
+router.post(
+  "/resend-verify",
+  validation.use("auth_resend_verify"),
+  controller.resendVerify
+);
 
 /**
  *  Login with Google

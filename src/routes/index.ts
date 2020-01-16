@@ -1,7 +1,7 @@
 import { Application, Request, Response } from "express";
 import path from "path";
 
-import env from "../env";
+import env from "../lib/env";
 import auth from "./auth.routes";
 import users from "./users.routes";
 

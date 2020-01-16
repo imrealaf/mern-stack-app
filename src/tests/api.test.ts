@@ -1,7 +1,7 @@
 import { Application } from "express";
 
 /* tslint:disable */
-import env from "../env";
+import env from "../lib/env";
 env.init();
 
 import { initApp } from "../app";

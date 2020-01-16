@@ -17,7 +17,7 @@ export const getClientBase = (): string => {
  *  @desc useful to determine host based on environment
  */
 export const getBaseUrl = (req: Request): string => {
-  const protocol = "http";
+  const protocol = `http${env.get("IS_SSL") ? "s" : ""}`;
   const host =
     env.get("NODE_ENV") === "production"
       ? req.headers.host

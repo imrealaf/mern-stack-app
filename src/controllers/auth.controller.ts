@@ -3,11 +3,11 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import env from "../env";
-import messages from "../messages/auth.messages";
+import env from "../lib/env";
+import message from "../lib/message";
+import { getClientBase } from "../lib/utils";
 import { Token, User } from "../models";
 import { IAuthRequest } from "../services/authentication";
-import { getClientBase } from "../utils";
 import emailController from "./email.controller";
 
 interface IAuthController {
@@ -33,7 +33,7 @@ class AuthController implements IAuthController {
       return res.json(user);
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(messages.error500);
+      return res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -69,7 +69,9 @@ class AuthController implements IAuthController {
        *  If user not found
        */
       if (!user) {
-        return res.status(400).json({ message: messages.error400Auth });
+        return res
+          .status(400)
+          .json({ message: message.get("auth_email_invalid") });
       }
 
       /**
@@ -81,14 +83,18 @@ class AuthController implements IAuthController {
        *  If password doesn't mamtch
        */
       if (!isMatch) {
-        return res.status(400).json({ message: messages.error400Auth });
+        return res
+          .status(400)
+          .json({ message: message.get("auth_email_invalid") });
       }
 
       /**
        *  Check if user is verified
        */
       if (env.get("AUTH_REQUIRE_USER_VERIFY") && !user.emailIsVerified) {
-        return res.status(400).json({ message: messages.email.verify });
+        return res
+          .status(400)
+          .json({ message: message.get("auth_email_verify") });
       }
 
       /**
@@ -103,7 +109,7 @@ class AuthController implements IAuthController {
         // If no token found ..
         if (!foundToken) {
           return res.status(404).json({
-            message: messages.error401
+            message: message.get("error_404", "token")
           });
         }
 
@@ -112,7 +118,9 @@ class AuthController implements IAuthController {
 
         // No user found for the token ..
         if (!foundUser) {
-          return res.status(404).json({ message: messages.error401 });
+          return res
+            .status(404)
+            .json({ message: message.get("error_404", "user") });
         }
 
         /**
@@ -171,7 +179,7 @@ class AuthController implements IAuthController {
       }
     } catch (error) {
       console.error(error.message);
-      res.status(500).send(messages.error500);
+      res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -207,7 +215,7 @@ class AuthController implements IAuthController {
       // If no token found ..
       if (!foundToken) {
         return res.status(404).json({
-          message: messages.error404("token")
+          message: message.get("error_404", "token")
         });
       }
 
@@ -216,23 +224,25 @@ class AuthController implements IAuthController {
 
       // No user found for the token ..
       if (!user) {
-        return res.status(404).json({ message: messages.verify.notFound });
+        return res
+          .status(404)
+          .json({ message: message.get("auth_email_verify_not_found") });
       }
 
       // If user is already verified ..
       if (user.emailIsVerified) {
         return res.status(400).json({
-          message: messages.verify.alreadyVerified
+          message: message.get("auth_email_verify_already")
         });
       }
 
       user.emailIsVerified = true;
       await user.save();
 
-      res.json({ message: messages.verify.verifySuccess });
+      res.json({ message: message.get("auth_email_verify_success") });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send(messages.error500);
+      res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -262,7 +272,7 @@ class AuthController implements IAuthController {
       // If no user found ..
       if (!user) {
         return res.status(404).json({
-          message: messages.resendVerify.notFound
+          message: message.get("auth_email_resend_verify_notfound")
         });
       }
 
@@ -285,7 +295,7 @@ class AuthController implements IAuthController {
       return res.json({ verifyToken: token.token });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send(messages.error500);
+      res.status(500).send(message.get("error_500"));
     }
   }
 

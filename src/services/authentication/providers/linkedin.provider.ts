@@ -4,8 +4,8 @@ import {
   VerifyFunctionWithRequest
 } from "passport-linkedin-oauth2";
 
-import env from "../../../env";
-import messages from "../../../messages/auth.messages";
+import env from "../../../lib/env";
+import message from "../../../lib/message";
 import { User } from "../../../models";
 
 const config: StrategyOptionWithRequest = {
@@ -51,7 +51,7 @@ const verify: VerifyFunctionWithRequest = async (
        */
       if (emailExists) {
         return done(undefined, false, {
-          message: messages.social.emailExists("LinkedIn")
+          message: message.get("auth_social_email_exists", "LinkedIn")
         });
 
         /**

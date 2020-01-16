@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import env from "../env";
-import messages from "../messages/users.messages";
+import env from "../lib/env";
+import message from "../lib/message";
 import { Token, User } from "../models";
 import { IAuthRequest } from "../services/authentication";
 import emailController from "./email.controller";
@@ -53,7 +53,9 @@ class UsersController implements IUsersController {
        *  If no users found ..
        */
       if (!users) {
-        return res.status(404).json({ message: messages.error404("users") });
+        return res
+          .status(404)
+          .json({ message: message.get("error_404", "users") });
       }
 
       /**
@@ -69,7 +71,7 @@ class UsersController implements IUsersController {
        */
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(messages.error500);
+      return res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -92,7 +94,7 @@ class UsersController implements IUsersController {
        */
       if (!user) {
         return res.status(404).json({
-          message: messages.error404("user")
+          message: message.get("error_404", "user")
         });
       }
 
@@ -106,7 +108,7 @@ class UsersController implements IUsersController {
        */
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(messages.error500);
+      return res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -146,7 +148,7 @@ class UsersController implements IUsersController {
        */
       if (user) {
         return res.status(400).json({
-          message: messages.create.userExists
+          message: message.get("users_create_exists")
         });
       }
 
@@ -193,7 +195,7 @@ class UsersController implements IUsersController {
         return res.json({
           userId: user._id,
           verifyToken: token.token,
-          message: messages.create.successVerify
+          message: message.get("users_create_exists_success_verify")
         });
 
         /**
@@ -228,7 +230,7 @@ class UsersController implements IUsersController {
       // Server error ..
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(messages.error500);
+      return res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -308,13 +310,13 @@ class UsersController implements IUsersController {
         // Server error ..
       } catch (error) {
         console.error(error.message);
-        return res.status(500).send(messages.error500);
+        return res.status(500).send(message.get("error_500"));
       }
 
       // Server error ..
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(messages.error500);
+      return res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -332,10 +334,10 @@ class UsersController implements IUsersController {
         _id: req.user.id
       });
 
-      return res.json({ message: messages.successDelete("user") });
+      return res.json({ message: message.get("delete_success", "user") });
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(messages.error500);
+      return res.status(500).send(message.get("error_500"));
     }
   }
 
@@ -376,7 +378,7 @@ class UsersController implements IUsersController {
          */
         if (!user) {
           return res.status(404).json({
-            message: messages.error404("user")
+            message: message.get("error_404", "user")
           });
         }
 
@@ -403,7 +405,7 @@ class UsersController implements IUsersController {
          */
         return res.json({
           secret: token.token,
-          message: "User has been upgraded to admin"
+          message: message.get("users_make_admin_success")
         });
 
         /**
@@ -411,10 +413,10 @@ class UsersController implements IUsersController {
          */
       } catch (error) {
         console.error(error.message);
-        return res.status(500).send(messages.error500);
+        return res.status(500).send(message.get("error_500"));
       }
     } else {
-      return res.status(401).json({ message: messages.error401 });
+      return res.status(401).json({ message: message.get("error_401") });
     }
   }
 }

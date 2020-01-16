@@ -4,8 +4,8 @@ import {
   VerifyFunctionWithRequest
 } from "passport-google-oauth2";
 
-import env from "../../../env";
-import messages from "../../../messages/auth.messages";
+import env from "../../../lib/env";
+import message from "../../../lib/message";
 import { User } from "../../../models";
 
 const config: StrategyOptionsWithRequest = {
@@ -47,7 +47,7 @@ const verify: VerifyFunctionWithRequest = async (
        */
       if (emailExists) {
         return done(undefined, false, {
-          message: messages.social.emailExists("Google")
+          message: message.get("auth_social_email_exists", "Google")
         });
 
         /**

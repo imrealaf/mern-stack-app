@@ -2,6 +2,8 @@ export default {
   APP_NAME: "MERN stack boilerplate",
   API_ROOT: "/api",
 
+  IS_SSL: false,
+
   PORT: 5000,
   CLIENT_PORT: 3000,
 

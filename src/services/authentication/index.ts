@@ -3,13 +3,13 @@ import jwt, { JsonWebTokenError } from "jsonwebtoken";
 import { Schema } from "mongoose";
 import passport from "passport";
 
-import messages from "../../config/messages.config";
-import env from "../../env";
+import env from "../../lib/env";
+import message from "../../lib/message";
 import { Token, User } from "../../models";
 import { facebook, google, linkedIn } from "./providers";
 
 /**
- *  Auth payload type
+ *  Auth payload
  */
 export interface IAuthUserPayload {
   id: Schema.Types.ObjectId;
@@ -18,7 +18,7 @@ export interface IAuthUserPayload {
 }
 
 /**
- *  Auth request interface
+ *  Auth request
  */
 export interface IAuthRequest extends Request {
   user: IAuthUserPayload;
@@ -28,6 +28,7 @@ export interface IAuthRequest extends Request {
  *  Auth service interface
  */
 export interface IAuthenticationService {
+  providers: any[];
   init(app: Application): void;
   middleware(
     req: Request,
@@ -50,6 +51,15 @@ export const getBearerTokenFromHeader = (req: Request) => {
  *  Auth service
  */
 class AuthenticationService implements IAuthenticationService {
+  public providers: any[];
+
+  constructor(providers: any[]) {
+    this.providers = providers;
+  }
+
+  /**
+   *  Init auth service
+   */
   public init(app: Application) {
     /**
      *  Init passport
@@ -57,21 +67,16 @@ class AuthenticationService implements IAuthenticationService {
     app.use(passport.initialize());
 
     /**
-     *  Google auth
+     *  Init providers
      */
-    passport.use(google);
-
-    /**
-     *  Facebook auth
-     */
-    passport.use(facebook);
-
-    /**
-     *  LinkedIn auth
-     */
-    passport.use(linkedIn);
+    for (const provider of this.providers) {
+      passport.use(provider);
+    }
   }
 
+  /**
+   *  Auth middleware
+   */
   public async middleware(
     req: Request,
     res: Response,
@@ -86,7 +91,7 @@ class AuthenticationService implements IAuthenticationService {
      *  If no token ..
      */
     if (!token) {
-      return res.status(401).json({ message: messages.error401 });
+      return res.status(401).json({ message: message.get("error_401") });
     }
 
     /**
@@ -101,7 +106,7 @@ class AuthenticationService implements IAuthenticationService {
            *  If token not valid ..
            */
           if (error) {
-            res.status(401).json({ message: messages.error401 });
+            res.status(401).json({ message: message.get("error_401") });
           }
 
           /**
@@ -117,7 +122,7 @@ class AuthenticationService implements IAuthenticationService {
               // If no token found ..
               if (!foundToken) {
                 return res.status(404).json({
-                  message: messages.error401
+                  message: message.get("error_401")
                 });
               }
 
@@ -126,7 +131,9 @@ class AuthenticationService implements IAuthenticationService {
 
               // No user found for the token ..
               if (!user) {
-                return res.status(404).json({ message: messages.error401 });
+                return res
+                  .status(404)
+                  .json({ message: message.get("error_401") });
               }
 
               // Return user
@@ -134,7 +141,9 @@ class AuthenticationService implements IAuthenticationService {
               next();
             } catch (error) {
               console.error(error.message);
-              return res.status(500).json({ message: messages.error500 });
+              return res
+                .status(500)
+                .json({ message: message.get("error_500") });
             }
 
             /**
@@ -153,9 +162,10 @@ class AuthenticationService implements IAuthenticationService {
        */
     } catch (error) {
       console.error(error.message);
-      res.status(500).json({ message: messages.error500 });
+      res.status(500).json({ message: message.get("error_500") });
     }
   }
 }
 
-export const AuthService = new AuthenticationService();
+/* Export service */
+export const AuthService = new AuthenticationService([facebook, google]);

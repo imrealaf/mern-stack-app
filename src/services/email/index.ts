@@ -1,6 +1,6 @@
 import sg from "@sendgrid/mail";
 
-import env from "../../env";
+import env from "../../lib/env";
 import { IEmailTemplates, templates } from "./templates";
 
 /**
@@ -74,5 +74,5 @@ class EmailService implements IMailService {
   }
 }
 
-// Export service
+/* Export service */
 export const MailService = new EmailService(sg, config, templates);
