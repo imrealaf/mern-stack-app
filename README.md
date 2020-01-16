@@ -2,6 +2,13 @@
 
 A powerful & elegant foundation for MERN Stack Applications w/ JWT Authentication (Email, Facebook, Google)
 
+### Authentication Strategies
+
+- Email & password
+- Facebook
+- Google
+- LinkedIn (coming soon)
+
 ### Back-End Includes
 
 - **Node.js** TypeScript
