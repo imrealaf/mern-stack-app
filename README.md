@@ -1,6 +1,6 @@
 # MERN Stack Application
 
-A powerful & elegant foundation for MERN Stack Applications w/ JWT Authentication
+A powerful & elegant foundation for MERN Stack Applications w/ JWT Authentication (Email, Facebook, Google)
 
 ### Back-End Includes
 
