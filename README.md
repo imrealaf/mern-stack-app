@@ -4,7 +4,7 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 ### Authentication Strategies
 
-- Email & password
+- Email & password v/ account verification
 - Facebook
 - Google
 - LinkedIn (coming soon)
