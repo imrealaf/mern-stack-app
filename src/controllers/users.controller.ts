@@ -3,15 +3,12 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import { env } from "../env";
+import env from "../env";
 import messages from "../messages/users.messages";
 import { Token, User } from "../models";
 import { IAuthRequest } from "../services/auth";
 import emailController from "./email.controller";
 
-/**
- *  Controller interface
- */
 interface IUsersController {
   get(req: IAuthRequest, res: Response): Promise<Response>;
   getById(req: IAuthRequest, res: Response): Promise<Response>;
@@ -173,14 +170,14 @@ class UsersController implements IUsersController {
       /**
        *  If verification required: no auto-login
        */
-      if (env("REQUIRE_USER_VERIFY")) {
+      if (env.get("AUTH_REQUIRE_USER_VERIFY")) {
         /**
          *  Create & save verification token
          */
         const token = new Token({
           userId: user._id,
           token: crypto
-            .randomBytes(env("AUTH_VERIFY_TOKEN_LENGTH"))
+            .randomBytes(env.get("AUTH_VERIFY_TOKEN_LENGTH"))
             .toString("hex")
         });
         await token.save();
@@ -213,10 +210,10 @@ class UsersController implements IUsersController {
           },
 
           // Secret
-          env("JWT_SECRET"),
+          env.get("JWT_SECRET"),
 
           // Expiration
-          { expiresIn: env("JWT_EXPIRY") },
+          { expiresIn: env.get("JWT_EXPIRY") },
 
           // Callback
           (err, token) => {
@@ -367,7 +364,7 @@ class UsersController implements IUsersController {
      */
     const { secret } = req.body;
 
-    if (secret === env("ADMIN_SECRET")) {
+    if (secret === env.get("ADMIN_SECRET")) {
       /**
        *  Try to get user from ID param
        */
@@ -389,7 +386,7 @@ class UsersController implements IUsersController {
         const token = new Token({
           userId: user._id,
           token: crypto
-            .randomBytes(env("AUTH_ADMIN_TOKEN_LENGTH"))
+            .randomBytes(env.get("AUTH_ADMIN_TOKEN_LENGTH"))
             .toString("hex")
         });
         await token.save();

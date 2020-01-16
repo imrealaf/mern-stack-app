@@ -4,14 +4,14 @@ import {
   VerifyFunctionWithRequest
 } from "passport-google-oauth2";
 
-import { env } from "../../../env";
+import env from "../../../env";
 import messages from "../../../messages/auth.messages";
 import { User } from "../../../models";
 
 const config: StrategyOptionsWithRequest = {
-  clientID: env("GOOGLE_CLIENT_ID"),
-  clientSecret: env("GOOGLE_CLIENT_SECRET"),
-  callbackURL: env("GOOGLE_CALLBACK_URL"),
+  clientID: env.get("GOOGLE_CLIENT_ID"),
+  clientSecret: env.get("GOOGLE_CLIENT_SECRET"),
+  callbackURL: env.get("GOOGLE_CALLBACK_URL"),
   passReqToCallback: true
 };
 

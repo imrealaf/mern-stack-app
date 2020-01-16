@@ -1,21 +1,15 @@
 import { Request } from "express";
 
-import { env } from "../env";
+import env from "../env";
 import { IUser } from "../models/user.model";
 import { emailService, IEmailService } from "../services/email";
 import { getBaseUrl } from "../utils";
 
-/**
- *  Controller interface
- */
 interface IEmailController {
   sendWelcomeEmail(req: Request, user: IUser): any;
   sendVerificationEmail(req: Request, user: IUser, token: string): any;
 }
 
-/**
- *  Controller class
- */
 class EmailController implements IEmailController {
   public service: IEmailService;
 
@@ -41,7 +35,7 @@ class EmailController implements IEmailController {
         name: user.profile.name,
         email: user.email
       },
-      subject: `Welcome to ${env("APP_NAME")}`,
+      subject: `Welcome to ${env.get("APP_NAME")}`,
       html: this.service.template("welcome", data)
     });
   }
@@ -64,7 +58,7 @@ class EmailController implements IEmailController {
         name: user.profile.name,
         email: user.email
       },
-      subject: `Welcome! Confirm your ${env("APP_NAME")} account`,
+      subject: `Welcome! Confirm your ${env.get("APP_NAME")} account`,
       html: this.service.template("verifyUser", data)
     });
   }

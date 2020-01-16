@@ -1,8 +1,7 @@
 import express, { Application } from "express";
-import { env, loadVars } from "./env";
+import env from "./env";
 
-// Load env vars
-loadVars();
+env.init();
 
 import applyMiddleware from "./middleware";
 import initRoutes from "./routes";
@@ -17,14 +16,14 @@ export const initApp = (): Application => {
   const app: Application = express();
 
   /**
-   *  Init authentication (if not in test env)
-   */
-  if (env("NODE_ENV") !== "test") authService.init(app);
-
-  /**
    *  Init database (if not in test env)
    */
-  if (env("NODE_ENV") !== "test") dbService.init();
+  if (env.get("NODE_ENV") !== "test") dbService.init();
+
+  /**
+   *  Init authentication (if not in test env)
+   */
+  if (env.get("NODE_ENV") !== "test") authService.init(app);
 
   /**
    *  Apply middleware

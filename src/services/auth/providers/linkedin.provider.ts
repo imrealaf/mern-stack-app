@@ -4,14 +4,14 @@ import {
   VerifyFunctionWithRequest
 } from "passport-linkedin-oauth2";
 
-import { env } from "../../../env";
+import env from "../../../env";
 import messages from "../../../messages/auth.messages";
 import { User } from "../../../models";
 
 const config: StrategyOptionWithRequest = {
-  clientID: env("LINKEDIN_CLIENT_ID"),
-  clientSecret: env("LINKEDIN_CLIENT_SECRET"),
-  callbackURL: env("LINKEDIN_CALLBACK_URL"),
+  clientID: env.get("LINKEDIN_CLIENT_ID"),
+  clientSecret: env.get("LINKEDIN_CLIENT_SECRET"),
+  callbackURL: env.get("LINKEDIN_CALLBACK_URL"),
   passReqToCallback: true
 };
 

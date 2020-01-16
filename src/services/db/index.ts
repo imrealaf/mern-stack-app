@@ -1,35 +1,7 @@
 import mongoose from "mongoose";
 
 import config from "../../config/mongo.config";
-import { env } from "../../env";
-
-/**
- *  DB Service type
- */
-
-// export const connectToDb = () => {
-//   return mongoose.connect(env("MONGO_URI"), config);
-// };
-
-/**
- *  DB Service
- */
-// export const initDb = async (): IDBService => {
-//   /**
-//    *  Try to connect to DB ..
-//    */
-//   try {
-//     await connectToDb();
-//     console.log("MongoDB connected..");
-
-//     /**
-//      *  Connection error ..
-//      */
-//   } catch (error) {
-//     console.log(error.message);
-//     process.exit(1);
-//   }
-// };
+import env from "../../env";
 
 export interface IDBService {
   init(): Promise<void>;
@@ -55,7 +27,7 @@ class DbService implements IDBService {
   }
 
   public connect() {
-    return mongoose.connect(env("MONGO_URI"), config);
+    return mongoose.connect(env.get("MONGO_URI"), config);
   }
 
   public onConnectionError(message: string) {

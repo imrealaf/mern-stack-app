@@ -3,17 +3,13 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import { env } from "../env";
+import env from "../env";
 import messages from "../messages/auth.messages";
-// import authMessages from "../messages/users.messages";
 import { Token, User } from "../models";
 import { IAuthRequest } from "../services/auth";
 import { getClientBase } from "../utils";
 import emailController from "./email.controller";
 
-/**
- *  Controller interface
- */
 interface IAuthController {
   getCurrentUser(req: IAuthRequest, res: Response): Promise<Response>;
   loginWithEmail(req: Request, res: Response): Promise<Response>;
@@ -23,9 +19,6 @@ interface IAuthController {
   loginWithProviderFail(req: Request, res: Response): Promise<void>;
 }
 
-/**
- *  Controller class
- */
 class AuthController implements IAuthController {
   /**
    *  Get current user
@@ -94,7 +87,7 @@ class AuthController implements IAuthController {
       /**
        *  Check if user is verified
        */
-      if (env("REQUIRE_USER_VERIFY") && !user.emailIsVerified) {
+      if (env.get("AUTH_REQUIRE_USER_VERIFY") && !user.emailIsVerified) {
         return res.status(400).json({ message: messages.email.verify });
       }
 
@@ -135,10 +128,10 @@ class AuthController implements IAuthController {
           },
 
           // Secret
-          env("JWT_SECRET"),
+          env.get("JWT_SECRET"),
 
           // Expiration
-          { expiresIn: env("JWT_EXPIRY") },
+          { expiresIn: env.get("JWT_EXPIRY") },
 
           // Callback
           (err, token) => {
@@ -162,10 +155,10 @@ class AuthController implements IAuthController {
           },
 
           // Secret
-          env("JWT_SECRET"),
+          env.get("JWT_SECRET"),
 
           // Expiration
-          { expiresIn: env("JWT_EXPIRY") },
+          { expiresIn: env.get("JWT_EXPIRY") },
 
           // Callback
           (err, token) => {
@@ -280,7 +273,7 @@ class AuthController implements IAuthController {
       const token = new Token({
         userId: user._id,
         token: crypto
-          .randomBytes(env("AUTH_VERIFY_TOKEN_LENGTH"))
+          .randomBytes(env.get("AUTH_VERIFY_TOKEN_LENGTH"))
           .toString("hex")
       });
       await token.save();
@@ -319,10 +312,10 @@ class AuthController implements IAuthController {
         },
 
         // Secret
-        env("JWT_SECRET"),
+        env.get("JWT_SECRET"),
 
         // Expiration
-        { expiresIn: env("JWT_EXPIRY") },
+        { expiresIn: env.get("JWT_EXPIRY") },
 
         // Callback
         (err, token) => {

@@ -4,7 +4,7 @@ import { Schema } from "mongoose";
 import passport from "passport";
 
 import messages from "../../config/messages.config";
-import { env } from "../../env";
+import env from "../../env";
 import { Token, User } from "../../models";
 import { facebook, google, linkedIn } from "./providers";
 
@@ -96,7 +96,7 @@ class AuthService implements IAuthService {
     try {
       await jwt.verify(
         token,
-        env("JWT_SECRET"),
+        env.get("JWT_SECRET"),
         async (error: JsonWebTokenError, decoded: any) => {
           /**
            *  If token not valid ..

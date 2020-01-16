@@ -14,4 +14,4 @@ export const JWT_EXPIRY = "8h";
 export const EMAIL_FROM_EMAIL = "no-reply@something.com";
 export const EMAIL_FROM_NAME = "MERN stack boilerplate Team";
 
-export const REQUIRE_USER_VERIFY = true;
+export const AUTH_REQUIRE_USER_VERIFY = true;

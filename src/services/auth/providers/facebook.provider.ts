@@ -4,14 +4,14 @@ import {
   VerifyFunctionWithRequest
 } from "passport-facebook";
 
-import { env } from "../../../env";
+import env from "../../../env";
 import messages from "../../../messages/auth.messages";
 import { User } from "../../../models";
 
 const config: StrategyOptionWithRequest = {
-  clientID: env("FACEBOOK_CLIENT_ID"),
-  clientSecret: env("FACEBOOK_CLIENT_SECRET"),
-  callbackURL: env("FACEBOOK_CALLBACK_URL"),
+  clientID: env.get("FACEBOOK_CLIENT_ID"),
+  clientSecret: env.get("FACEBOOK_CLIENT_SECRET"),
+  callbackURL: env.get("FACEBOOK_CALLBACK_URL"),
   passReqToCallback: true,
   profileFields: ["id", "displayName", "photos", "email", "gender", "name"]
 };

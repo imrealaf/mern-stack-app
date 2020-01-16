@@ -1,6 +1,6 @@
 import sg from "@sendgrid/mail";
 
-import { env } from "../../env";
+import env from "../../env";
 import { IEmailTemplates, templates } from "./templates";
 
 /**
@@ -26,14 +26,14 @@ export interface IEmailService {
  *  Email configuration
  */
 export const config: IEmailConfig = {
-  fromEmail: env("EMAIL_FROM_EMAIL"),
-  fromName: env("EMAIL_FROM_NAME")
+  fromEmail: env.get("EMAIL_FROM_EMAIL"),
+  fromName: env.get("EMAIL_FROM_NAME")
 };
 
 /**
  *  Set SendGrid API key
  */
-sg.setApiKey(env("EMAIL_API_KEY"));
+sg.setApiKey(env.get("EMAIL_API_KEY"));
 
 /**
  *  Email service class

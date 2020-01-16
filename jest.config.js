@@ -1,11 +1,7 @@
 const { CONF: tsConfig = "tsconfig.json" } = process.env;
 
 module.exports = {
-  collectCoverageFrom: [
-    "<rootDir>/src/**/*.ts",
-    "!<rootDir>/src/**/*.spec.ts",
-    "!<rootDir>/src/**/__*__/*"
-  ],
+  collectCoverageFrom: ["<rootDir>/src/**/*.ts"],
   testEnvironment: "node",
   coveragePathIgnorePatterns: [".*.d.ts", "/node_modules/"],
   globals: {

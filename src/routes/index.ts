@@ -1,7 +1,7 @@
 import { Application, Request, Response } from "express";
 import path from "path";
 
-import { env } from "../env";
+import env from "../env";
 import auth from "./auth.routes";
 import users from "./users.routes";
 
@@ -20,7 +20,7 @@ export default (app: Application) => {
   for (const route in routes) {
     if (routes.hasOwnProperty(route)) {
       app.use(
-        `${route !== "auth" ? env("API_ROOT") : ""}/${route}`,
+        `${route !== "auth" ? env.get("API_ROOT") : ""}/${route}`,
         routes[route]
       );
     }
@@ -30,7 +30,7 @@ export default (app: Application) => {
    *  If production, register client app route
    *  @desc serve static html file and route all other traffic back to index
    */
-  if (env("NODE_ENV") === "production") {
+  if (env.get("NODE_ENV") === "production") {
     app.get("*", (req: Request, res: Response) => {
       res.sendFile(path.resolve(__dirname, "../public/index.html"));
     });

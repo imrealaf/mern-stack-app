@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 
-import { env } from "../env";
+import env from "../env";
 
 export const validateCreateUser = [
   check("name", "Please enter your name")
@@ -9,10 +9,10 @@ export const validateCreateUser = [
   check("email", "Please include a valid email").isEmail(),
   check(
     "password",
-    `Please enter a password with ${env(
+    `Please enter a password with ${env.get(
       "AUTH_MIN_PASSWORD_LENGTH"
     )} or more characters`
-  ).isLength({ min: env("AUTH_MIN_PASSWORD_LENGTH") })
+  ).isLength({ min: env.get("AUTH_MIN_PASSWORD_LENGTH") })
 ];
 
 export const validateUpdateUserProfile = [

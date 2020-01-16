@@ -1,14 +1,14 @@
 import { Request } from "express";
 
-import { env } from "./env";
+import env from "./env";
 
 /**
  *  Get client base
  *  @desc useful to figure out redirect root when in development mode
  */
 export const getClientBase = (): string => {
-  return env("NODE_ENV") === "development"
-    ? `http://localhost:${env("CLIENT_PORT")}`
+  return env.get("NODE_ENV") === "development"
+    ? `http://localhost:${env.get("CLIENT_PORT")}`
     : "";
 };
 
@@ -19,9 +19,9 @@ export const getClientBase = (): string => {
 export const getBaseUrl = (req: Request): string => {
   const protocol = "http";
   const host =
-    env("NODE_ENV") === "production"
+    env.get("NODE_ENV") === "production"
       ? req.headers.host
-      : `localhost:${env("CLIENT_PORT")}`;
+      : `localhost:${env.get("CLIENT_PORT")}`;
 
   return `${protocol}://${host}`;
 };
