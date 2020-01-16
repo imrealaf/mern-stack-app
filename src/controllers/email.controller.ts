@@ -2,7 +2,7 @@ import { Request } from "express";
 
 import env from "../env";
 import { IUser } from "../models/user.model";
-import { emailService, IEmailService } from "../services/email";
+import { IMailService, MailService } from "../services/email";
 import { getBaseUrl } from "../utils";
 
 interface IEmailController {
@@ -11,9 +11,9 @@ interface IEmailController {
 }
 
 class EmailController implements IEmailController {
-  public service: IEmailService;
+  public service: IMailService;
 
-  constructor(service: IEmailService) {
+  constructor(service: IMailService) {
     this.service = service;
   }
 
@@ -64,4 +64,4 @@ class EmailController implements IEmailController {
   }
 }
 
-export default new EmailController(emailService);
+export default new EmailController(MailService);

@@ -6,7 +6,7 @@ import { IEmailTemplates, templates } from "./templates";
 /**
  *  Email config interface
  */
-export interface IEmailConfig {
+export interface IMailConfig {
   fromEmail: string;
   fromName: string;
 }
@@ -14,9 +14,9 @@ export interface IEmailConfig {
 /**
  *  Email service interface
  */
-export interface IEmailService {
+export interface IMailService {
   client: any;
-  config: IEmailConfig;
+  config: IMailConfig;
   templates: IEmailTemplates;
   template(name: string, data: any): string;
   send(options: any): void;
@@ -25,7 +25,7 @@ export interface IEmailService {
 /**
  *  Email configuration
  */
-export const config: IEmailConfig = {
+export const config: IMailConfig = {
   fromEmail: env.get("EMAIL_FROM_EMAIL"),
   fromName: env.get("EMAIL_FROM_NAME")
 };
@@ -38,15 +38,15 @@ sg.setApiKey(env.get("EMAIL_API_KEY"));
 /**
  *  Email service class
  */
-class EmailService implements IEmailService {
+class EmailService implements IMailService {
   public client: any;
-  public config: IEmailConfig;
+  public config: IMailConfig;
   public templates: any;
 
   /**
    *  Constructor
    */
-  constructor(client: any, conf: IEmailConfig, templ: IEmailTemplates) {
+  constructor(client: any, conf: IMailConfig, templ: IEmailTemplates) {
     this.client = client;
     this.config = conf;
     this.templates = templ;
@@ -75,4 +75,4 @@ class EmailService implements IEmailService {
 }
 
 // Export service
-export const emailService = new EmailService(sg, config, templates);
+export const MailService = new EmailService(sg, config, templates);
