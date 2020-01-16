@@ -2,7 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 
 import controller from "../controllers/auth.controller";
-import { authService } from "../services/auth";
+import { AuthService } from "../services/authentication";
 import {
   validateLogin,
   validateResendVerify,
@@ -18,7 +18,7 @@ const router: Router = Router();
  *  @route  /auth
  *  @access private
  */
-router.get("/", authService.middleware, controller.getCurrentUser);
+router.get("/", AuthService.middleware, controller.getCurrentUser);
 
 /**
  *  Login with email

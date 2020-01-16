@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import env from "../env";
 import messages from "../messages/users.messages";
 import { Token, User } from "../models";
-import { IAuthRequest } from "../services/auth";
+import { IAuthRequest } from "../services/authentication";
 import emailController from "./email.controller";
 
 interface IUsersController {

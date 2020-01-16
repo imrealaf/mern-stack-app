@@ -3,11 +3,11 @@ import env from "./env";
 
 env.init();
 
-import applyMiddleware from "./middleware";
+import middleware from "./middleware";
 import initRoutes from "./routes";
 import initServer from "./server";
-import { authService } from "./services/auth";
-import { dbService } from "./services/database";
+import { AuthService } from "./services/authentication";
+import { DbService } from "./services/database";
 
 export const initApp = (): Application => {
   /**
@@ -18,17 +18,17 @@ export const initApp = (): Application => {
   /**
    *  Init database (if not in test env)
    */
-  if (env.get("NODE_ENV") !== "test") dbService.init();
+  if (env.get("NODE_ENV") !== "test") DbService.init();
 
   /**
    *  Init authentication (if not in test env)
    */
-  if (env.get("NODE_ENV") !== "test") authService.init(app);
+  if (env.get("NODE_ENV") !== "test") AuthService.init(app);
 
   /**
    *  Apply middleware
    */
-  applyMiddleware(app);
+  middleware.apply(app);
 
   /**
    *  Register routes

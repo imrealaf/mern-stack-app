@@ -4,7 +4,7 @@ import request from "supertest";
 
 import env from "../env";
 import { User } from "../models";
-import { dbService } from "../services/database";
+import { DbService } from "../services/database";
 
 const userCreds = {
   email: "someemail@something.com",
@@ -18,7 +18,7 @@ let userId: string;
 export default (app: Application) => {
   return describe("API: Users & Auth", () => {
     beforeAll(async () => {
-      await dbService.connect();
+      await DbService.connect();
       const collections = await mongoose.connection.db.collections();
       for (const collection of collections) {
         await collection.deleteOne(this);

@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import env from "../env";
 import messages from "../messages/auth.messages";
 import { Token, User } from "../models";
-import { IAuthRequest } from "../services/auth";
+import { IAuthRequest } from "../services/authentication";
 import { getClientBase } from "../utils";
 import emailController from "./email.controller";
 

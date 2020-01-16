@@ -25,16 +25,15 @@ export interface IAuthRequest extends Request {
 }
 
 /**
- *  Auth middleware type
- */
-export type IAuthMiddleware = Promise<Response>;
-
-/**
  *  Auth service interface
  */
-export interface IAuthService {
+export interface IAuthenticationService {
   init(app: Application): void;
-  middleware(req: Request, res: Response, next: NextFunction): IAuthMiddleware;
+  middleware(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response>;
 }
 
 /**
@@ -50,7 +49,7 @@ export const getBearerTokenFromHeader = (req: Request) => {
 /**
  *  Auth service
  */
-class AuthService implements IAuthService {
+class AuthenticationService implements IAuthenticationService {
   public init(app: Application) {
     /**
      *  Init passport
@@ -77,7 +76,7 @@ class AuthService implements IAuthService {
     req: Request,
     res: Response,
     next: NextFunction
-  ): IAuthMiddleware {
+  ): Promise<Response> {
     /*
      *  Get token
      */
@@ -159,4 +158,4 @@ class AuthService implements IAuthService {
   }
 }
 
-export const authService = new AuthService();
+export const AuthService = new AuthenticationService();

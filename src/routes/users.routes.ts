@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import controller from "../controllers/users.controller";
-import { authService } from "../services/auth";
+import { AuthService } from "../services/authentication";
 import {
   validateCreateUser,
   validateMakeAdmin,
@@ -17,7 +17,7 @@ const router: Router = Router();
  *  @route  /api/users
  *  @access private
  */
-router.get("/", authService.middleware, controller.get);
+router.get("/", AuthService.middleware, controller.get);
 
 /**
  *  Get user by id
@@ -26,7 +26,7 @@ router.get("/", authService.middleware, controller.get);
  *  @route  /api/users:id
  *  @access private
  */
-router.get("/:id", authService.middleware, controller.getById);
+router.get("/:id", AuthService.middleware, controller.getById);
 
 /**
  *  Create user
@@ -46,7 +46,7 @@ router.post("/", validateCreateUser, controller.create);
  */
 router.put(
   "/",
-  authService.middleware,
+  AuthService.middleware,
   validateUpdateUserProfile,
   controller.update
 );

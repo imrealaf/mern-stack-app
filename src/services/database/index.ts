@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import env from "../../env";
-import { config, IDatabaseConfig } from "./db.config";
+import { config, IDatabaseConfig } from "./database.config";
 
 export interface IDatabaseService {
   config: IDatabaseConfig;
@@ -41,4 +41,4 @@ class DatabaseService implements IDatabaseService {
   }
 }
 
-export const dbService = new DatabaseService();
+export const DbService = new DatabaseService();
