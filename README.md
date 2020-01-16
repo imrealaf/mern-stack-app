@@ -13,6 +13,7 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 - **Node.js** TypeScript
 - **Dotenv** for handling of environment variables
+- **Jest** & **Supertest** for unit tests
 - **Express** implemented w/ Node **Cluster API** for performance optimization
 - **Passport** authentication w/ **JWT** for all major social networks and local email
 - **MongoDB** w/ Mongoose for database modeleing
@@ -26,7 +27,7 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 - **React** TypeScript
 - **TSLint** setup w/ **Prettier**
-- **Jest** & **Enzyme** for testing
+- **Jest** & **Enzyme** unit tests
 - **React Router DOM** w/ with public & protected routes
 - **SASS** enabled with **Bootstrap** SASS included
 - **React Bootstrap** for base UI components
