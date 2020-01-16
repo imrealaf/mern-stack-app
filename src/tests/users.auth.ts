@@ -16,7 +16,7 @@ let authToken: string;
 let userId: string;
 
 export default (app: Application) => {
-  return describe("-- API: Users & Auth", () => {
+  return describe("API: Users & Auth", () => {
     beforeAll(async () => {
       await dbService.connect();
       const collections = await mongoose.connection.db.collections();
