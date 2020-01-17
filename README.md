@@ -40,22 +40,23 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 #### Auth
 
-- /auth -> **{GET}** - get current user
-- /auth/email **{GET}** - login with email/password
-- /auth/facebook **{GET}** - login with Facebook
-- /auth/facebook/callback **{GET}**
-- /auth/google **{GET}** - login with Google
-- /auth/google/callback **{GET}**
-- /auth/verify **POST** - verify account email
-- /auth/resend-verify **POST** - resend verification email
+- /auth -> **{GET}** get current user
+- /auth/email -> **{GET}** login with email/password
+- /auth/facebook -> **{GET}** login with Facebook
+- /auth/facebook/callback -> **{GET}** Facebook callback
+- /auth/google -> **{GET}** login with Google
+- /auth/google/callback -> **{GET}** Google callback
+- /auth/verify -> **{POST}** verify account email
+- /auth/resend-verify -> **{POST}** resend verification email
 
 #### API
 
-- /api/users **{GET}** - get all users
-- /api/users **POST** - create user
-- /api/users **PUT** - update user
-- /api/users/:id **GET** - get user by ID
-- /api/users/:id **DELETE** - delete user by ID
+- /api/users -> **{GET}** get all users
+- /api/users -> **{POST}** create user
+- /api/users -> **{PUT}** update user
+- /api/users/:id -> **{GET}** get user by ID
+- /api/users/:id -> **{DELETE}** delete user by ID
+- /api/users/admin/:id -> **{PUT}** make user an admin
 
 ### Front-End Routes
 
