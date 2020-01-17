@@ -40,7 +40,7 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 #### Auth
 
-- /auth **{GET}** - get current user
+- /auth -> **{GET}** - get current user
 - /auth/email **{GET}** - login with email/password
 - /auth/facebook **{GET}** - login with Facebook
 - /auth/facebook/callback **{GET}**
