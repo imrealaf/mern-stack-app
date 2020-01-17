@@ -242,7 +242,9 @@ class AuthController implements IAuthController {
       res.json({ message: message.get("auth_email_verify_success") });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send(message.get("error_500"));
+      res.status(500).send({
+        message: message.get("error_401")
+      });
     }
   }
 

@@ -5,14 +5,24 @@ import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
-import { sendRequest } from "../../http";
 import {
   doVerify,
   verifyFail,
   verifySuccess
 } from "../../redux/actions/user.actions";
+import { sendRequest } from "../../utils/http";
 
-export default (token: string | undefined) => {
+/**
+ *  Hook api interface
+ */
+export interface IUseVerify {
+  pending: boolean;
+  isVerified: boolean;
+  message: string;
+  error: string | null;
+}
+
+export default (token: string | undefined): IUseVerify => {
   /**
    *  Load dispatch
    */

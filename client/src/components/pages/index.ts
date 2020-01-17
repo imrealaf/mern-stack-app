@@ -1,8 +1,8 @@
 import NotFound from "./NotFound";
 
-import Dashboard from "./frontend/Dashboard";
-import Generic from "./frontend/Generic";
-import Landing from "./frontend/Landing";
+import Dashboard from "./public/Dashboard";
+import Generic from "./public/Generic";
+import Landing from "./public/Landing";
 
 import AuthSuccess from "./auth/AuthSuccess";
 import Login from "./auth/Login";
@@ -10,7 +10,7 @@ import ResendVerify from "./auth/ResendVerify";
 import SignUp from "./auth/SignUp";
 import Verify from "./auth/Verify";
 
-import AdminDashboard from "./backend/AdminDashboard";
+import AdminDashboard from "./admin/AdminDashboard";
 
 export {
   Generic,

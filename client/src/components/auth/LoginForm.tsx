@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 
 import * as routes from "../../constants/routes";
+import providers from "../../data/auth/social-providers.json";
 import { useQuery } from "../../hooks";
+import { IUseLogin } from "../../hooks/auth/useLogin";
 import { sanitize } from "../../utils";
 import { Preloader } from "../ui";
 import { SocialProviders } from "./";
@@ -19,13 +21,12 @@ const compName = "login-form";
  *  Props definition
  */
 interface ILoginFormProps {
-  login: any;
-  showSocial: boolean;
+  login: IUseLogin;
 }
 
 const LoginForm: React.FC<ILoginFormProps> & {
   defaultProps: Partial<ILoginFormProps>;
-} = ({ login, showSocial }) => {
+} = ({ login }) => {
   /**
    *  Read success query var
    */
@@ -109,13 +110,13 @@ const LoginForm: React.FC<ILoginFormProps> & {
           </Button>
         ) : null}
 
-        {showSocial ? <SocialProviders show={!login.data.email} /> : null}
+        {providers.length ? <SocialProviders show={!login.data.email} /> : null}
 
         {!login.data.email ? (
           <div className="mt-3">
             <small>
               Don't have an account?{" "}
-              <Link to={routes.SIGN_UP}>
+              <Link to={routes.SIGN_UP} className="text-dark">
                 <strong>Sign Up</strong>
               </Link>
             </small>
@@ -130,8 +131,6 @@ const LoginForm: React.FC<ILoginFormProps> & {
 /**
  *  Default props
  */
-LoginForm.defaultProps = {
-  showSocial: true
-};
+LoginForm.defaultProps = {};
 
 export default LoginForm;

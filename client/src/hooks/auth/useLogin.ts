@@ -5,8 +5,8 @@ import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
-import { sendRequest } from "../../http";
 import { doLogin, login, loginFail } from "../../redux/actions/user.actions";
+import { sendRequest } from "../../utils/http";
 
 /**
  *  State interface

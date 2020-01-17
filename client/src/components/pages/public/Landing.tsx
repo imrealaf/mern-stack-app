@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import "./Landing.scss";
 
 import * as routes from "../../../constants/routes";
-import data from "../../../data/landing";
+import data from "../../../data/public/pages/landing.json";
 import { sanitize } from "../../../utils";
 
 import { IPageProps, Page } from "../../hoc/Page";
@@ -27,7 +27,7 @@ const Landing: React.FC<IPageProps> = ({ isAuthenticated }) => {
   return (
     <Page descrip="This is the home page">
       {/* Hero */}
-      <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.9}>
+      <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.7}>
         <div className="text-center text-white">
           <h1
             className="display-3"

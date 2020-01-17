@@ -1,0 +1,14 @@
+[
+  {
+    "id": "facebook",
+    "icon": "facebook-f",
+    "title": "Facebook",
+    "path": "{AUTH_FACEBOOK}"
+  },
+  {
+    "id": "google",
+    "icon": "google",
+    "title": "Google",
+    "path": "{AUTH_GOOGLE}"
+  }
+]

@@ -1,4 +1,5 @@
-import config from "./constants/config";
+import config from "../constants/config";
+import * as routes from "../constants/routes";
 import { deleteHeader, setHeader } from "./http";
 
 /**
@@ -47,4 +48,17 @@ export const checkAuthToken = (): void => {
   if (hasAuthToken()) {
     setAuthTokenHeader(getAuthToken());
   }
+};
+
+/**
+ *  Determine if auth page
+ */
+export const isAuthPage = (location: any) => {
+  return (
+    location.pathname === routes.LOGIN ||
+    location.pathname === routes.SIGN_UP ||
+    location.pathname === routes.RESEND_VERIFY ||
+    (location.pathname !== "/" &&
+      routes.VERIFY.indexOf("/" + location.pathname.split("/")[1]) > -1)
+  );
 };

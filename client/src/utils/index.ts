@@ -1,8 +1,8 @@
 import moment, { Moment } from "moment";
 import sanitizeHtml from "sanitize-html";
 
-import config from "./constants/config";
-import * as routes from "./constants/routes";
+import config from "../constants/config";
+import dictionary from "../constants/dictionary";
 
 export const getCurrentRoute = (
   location: any,
@@ -38,18 +38,6 @@ export const onTransitionEnd = (element: HTMLElement, callback: any): void => {
   }, duration);
 };
 
-export const addBodyClass = (...classes: string[]): void => {
-  document.body.classList.add(...classes);
-};
-
-export const removeBodyClass = (...classes: string[]): void => {
-  document.body.classList.remove(...classes);
-};
-
-export const sanitize = (html: string) => {
-  return { __html: sanitizeHtml(html, config.sanitizeHtml) };
-};
-
 export const getGreetingTime = (currentTime: Moment = moment()): string => {
   if (!currentTime || !currentTime.isValid()) {
     return "Hello";
@@ -74,16 +62,64 @@ export const getServerBase = () => {
   return process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
 };
 
-export const isAuthPage = (location: any) => {
-  return (
-    location.pathname === routes.LOGIN ||
-    location.pathname === routes.SIGN_UP ||
-    location.pathname === routes.RESEND_VERIFY ||
-    (location.pathname !== "/" &&
-      routes.VERIFY.indexOf("/" + location.pathname.split("/")[1]) > -1)
-  );
-};
-
 export const isAdminPage = (location: any) => {
   return location.pathname.split("/")[1] === "admin";
+};
+
+export const classBuilder = (mandatory: string[], conditional: any[]) => {
+  const classes = [...mandatory];
+
+  if (conditional && conditional.length) {
+    for (const item of conditional) {
+      const { condition, value } = item;
+      if (condition === true) {
+        if (Array.isArray(value)) {
+          const [executable, className] = value;
+          executable();
+          classes.push(className);
+        } else {
+          classes.push(value);
+        }
+      }
+    }
+  }
+
+  return classes;
+};
+
+const extract = (arr: string[]) => {
+  const beg = arr[0];
+  const end = arr[1];
+  const matcher = new RegExp(`${beg}(.*?)${end}`, "gm");
+
+  const normalize = (str: string) => str.slice(beg.length, end.length * -1);
+
+  return (str: any) => {
+    const match = str.match(matcher);
+    return match ? str.match(matcher).map(normalize) : "";
+  };
+};
+
+export const interpolate = (str: string) => {
+  let output = str;
+  const extractor = extract(["{", "}"]);
+  const vars = extractor(output);
+  const data = dictionary as any;
+
+  if (vars.length) {
+    for (const key of vars) {
+      if (typeof data[key] !== undefined && data[key]) {
+        const re = new RegExp(`{${key}}`, "g");
+        output = output.replace(re, data[key]);
+      }
+    }
+  }
+
+  return output;
+};
+
+export const sanitize = (str: string, parseData: boolean = true) => {
+  let output = str;
+  if (parseData) output = interpolate(output);
+  return { __html: sanitizeHtml(output, config.sanitizeHtml) };
 };

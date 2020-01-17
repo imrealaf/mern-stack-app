@@ -1,6 +1,6 @@
 import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
 
-import { RequestMethod } from "./types/Request";
+import { RequestMethod } from "../types/Request";
 
 /**
  *  Send request method
@@ -12,8 +12,8 @@ export const sendRequest = (
 ): AxiosPromise => {
   // Request config
   const config: AxiosRequestConfig = {
-    method: method,
-    url: url,
+    method,
+    url,
     headers: {
       "Content-Type": "application/json"
     }

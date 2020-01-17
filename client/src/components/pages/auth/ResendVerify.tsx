@@ -41,8 +41,8 @@ const ResendVerify: React.FC<IPageProps> = ({ isAuthenticated }) => {
                 icon={["fas", "code"]}
                 size="1x"
               />{" "}
-              <span className="font-light">{config.appName}</span>
-              <small className="d-block text-secondary mt-2">
+              <span>{config.appName}</span>
+              <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
                 Resend Verification
               </small>
             </h4>

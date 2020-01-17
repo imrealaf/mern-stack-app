@@ -1,13 +1,13 @@
 import { AnyAction } from "redux";
 
-import { AuthUserState } from "../../types/Auth";
 import { getAuthToken, removeAuthToken, setAuthToken } from "../../utils/auth";
-import * as types from "../actionTypes";
+import types from "../actions";
+import { IUserState } from "./";
 
 /**
  *  Initial state
  */
-const initialState: AuthUserState = {
+export const initialState: IUserState = {
   token: getAuthToken(),
   isAuthenticated: false,
   isAdmin: false,
@@ -15,7 +15,10 @@ const initialState: AuthUserState = {
   data: null
 };
 
-export default (state: AuthUserState = initialState, action: AnyAction) => {
+export const userReducer = (
+  state: IUserState = initialState,
+  action: AnyAction
+) => {
   /**
    *  Destructure data from payload
    */
@@ -25,7 +28,7 @@ export default (state: AuthUserState = initialState, action: AnyAction) => {
     /**
      *  Auth success
      */
-    case types.AUTH_SUCCESS:
+    case types.USER_AUTH_SUCCESS:
       return {
         ...state,
         data: payload,
@@ -37,7 +40,7 @@ export default (state: AuthUserState = initialState, action: AnyAction) => {
     /**
      *  Auth fail
      */
-    case types.AUTH_FAIL:
+    case types.USER_AUTH_FAIL:
       // Remove token from local storage
       removeAuthToken();
       return {
@@ -51,7 +54,7 @@ export default (state: AuthUserState = initialState, action: AnyAction) => {
     /**
      *  Login/Sign up success
      */
-    case types.SIGNUP_SUCCESS:
+    case types.USER_SIGNUP_SUCCESS:
       const newState = {
         ...state,
         isAuthenticated: !payload.verify ? true : false,
@@ -66,24 +69,24 @@ export default (state: AuthUserState = initialState, action: AnyAction) => {
     /**
      *  Set loading
      */
-    case types.AUTH:
-    case types.LOGIN:
-    case types.SIGNUP:
-    case types.VERIFY:
-    case types.RESEND_VERIFY:
+    case types.USER_AUTH:
+    case types.USER_LOGIN:
+    case types.USER_SIGNUP:
+    case types.USER_VERIFY:
+    case types.USER_RESEND_VERIFY:
       return { ...state, loading: true };
 
     /**
      *  Set not loading
      */
-    case types.VERIFY_SUCCESS:
-    case types.RESEND_VERIFY_SUCCESS:
+    case types.USER_VERIFY_SUCCESS:
+    case types.USER_RESEND_VERIFY_SUCCESS:
       return { ...state, loading: false };
 
     /**
      *  Login/Sign up success
      */
-    case types.LOGIN_SUCCESS:
+    case types.USER_LOGIN_SUCCESS:
       // Set token to local storage
       setAuthToken(payload.token);
       return { ...state, ...payload, isAuthenticated: true, loading: false };
@@ -91,9 +94,9 @@ export default (state: AuthUserState = initialState, action: AnyAction) => {
     /**
      *  Login/Sign up fail or Logout
      */
-    case types.SIGNUP_FAIL:
-    case types.LOGIN_FAIL:
-    case types.LOGOUT:
+    case types.USER_SIGNUP_FAIL:
+    case types.USER_LOGIN_FAIL:
+    case types.USER_LOGOUT:
       // Remove token from local storage
       removeAuthToken();
       return {

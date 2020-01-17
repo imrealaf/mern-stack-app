@@ -3,11 +3,12 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { checkAuthToken } from "./auth";
-import { App } from "./components";
-import store from "./redux/store";
-import { unregister } from "./registerServiceWorker";
 import "./styles/index.scss";
+
+import { App } from "./components";
+import { unregister } from "./registerServiceWorker";
+import store from "./store";
+import { checkAuthToken } from "./utils/auth";
 
 /**
  *  Check for auth token
@@ -29,4 +30,4 @@ ReactDOM.render(
 /**
  *  Register service worker
  */
-unregister(); //
+unregister();

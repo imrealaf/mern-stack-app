@@ -4,12 +4,12 @@ import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
-import { sendRequest } from "../../http";
 import {
   signUp,
   signUpFail,
   signUpSuccess
 } from "../../redux/actions/user.actions";
+import { sendRequest } from "../../utils/http";
 
 /**
  *  State interface

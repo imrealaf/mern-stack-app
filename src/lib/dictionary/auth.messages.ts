@@ -14,5 +14,7 @@ export default {
   },
   auth_password_required: "Password is required",
   auth_verify_token_required: "No verification token sent",
-  auth_email_resend_verify_required: "Email to send verification to is missing"
+  auth_email_resend_verify_required: "Email to send verification to is missing",
+  auth_email_verify_fail:
+    "Could not verify the account. The token is invalid or malformed"
 };

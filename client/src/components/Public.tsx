@@ -1,7 +1,7 @@
 import React from "react";
 
 import * as routes from "../constants/routes";
-import { isAuthPage } from "../utils";
+import { isAuthPage } from "../utils/auth";
 import { Navigation } from "./navigation";
 import { FrontRoutes } from "./routes";
 

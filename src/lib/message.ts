@@ -32,8 +32,7 @@ class Message implements IMessage {
      *  If is a callable function
      */
     if (Object.prototype.toString.call(definition) === "[object Function]") {
-      this.value = this.dictionary[key](data);
-
+      this.value = Function.call(this.dictionary[key], [data]);
       /**
        *  Else normal value
        */

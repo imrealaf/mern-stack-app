@@ -2,10 +2,10 @@ import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import * as routes from "../../constants/routes";
-import { AuthPayload, AuthUserPayload } from "../../types/Auth";
 import * as auth from "../../utils/auth";
 import { sendRequest } from "../../utils/http";
-import * as types from "../actionTypes";
+import types from "../actions";
+import { IUser, IUserPayload } from "./";
 
 //////////////////////////  A U T H   /////////////////////////////////////////////
 
@@ -15,7 +15,7 @@ import * as types from "../actionTypes";
  */
 export const doAuth = (): AnyAction => {
   return {
-    type: types.AUTH
+    type: types.USER_AUTH
   };
 };
 
@@ -23,9 +23,9 @@ export const doAuth = (): AnyAction => {
  *  Auth success
  *  @type action creator
  */
-export const authSuccess = (payload: AuthUserPayload): AnyAction => {
+export const authSuccess = (payload: IUser | null): AnyAction => {
   return {
-    type: types.AUTH_SUCCESS,
+    type: types.USER_AUTH_SUCCESS,
     payload
   };
 };
@@ -36,7 +36,7 @@ export const authSuccess = (payload: AuthUserPayload): AnyAction => {
  */
 export const authFail = (): AnyAction => {
   return {
-    type: types.AUTH_FAIL
+    type: types.USER_AUTH_FAIL
   };
 };
 
@@ -72,7 +72,7 @@ export const getCurrentUser = (): any => async (
  */
 export const doVerify = (): AnyAction => {
   return {
-    type: types.VERIFY
+    type: types.USER_VERIFY
   };
 };
 
@@ -82,7 +82,7 @@ export const doVerify = (): AnyAction => {
  */
 export const verifySuccess = (): AnyAction => {
   return {
-    type: types.VERIFY_SUCCESS
+    type: types.USER_VERIFY_SUCCESS
   };
 };
 
@@ -92,7 +92,7 @@ export const verifySuccess = (): AnyAction => {
  */
 export const verifyFail = (): AnyAction => {
   return {
-    type: types.VERIFY_FAIL
+    type: types.USER_VERIFY_FAIL
   };
 };
 
@@ -104,7 +104,7 @@ export const verifyFail = (): AnyAction => {
  */
 export const resendVerify = (): AnyAction => {
   return {
-    type: types.RESEND_VERIFY
+    type: types.USER_RESEND_VERIFY
   };
 };
 
@@ -114,7 +114,7 @@ export const resendVerify = (): AnyAction => {
  */
 export const resendVerifySuccess = (): AnyAction => {
   return {
-    type: types.RESEND_VERIFY_SUCCESS
+    type: types.USER_RESEND_VERIFY_SUCCESS
   };
 };
 
@@ -124,7 +124,7 @@ export const resendVerifySuccess = (): AnyAction => {
  */
 export const resendVerifyFail = (): AnyAction => {
   return {
-    type: types.RESEND_VERIFY_FAIL
+    type: types.USER_RESEND_VERIFY_FAIL
   };
 };
 
@@ -136,7 +136,7 @@ export const resendVerifyFail = (): AnyAction => {
  */
 export const signUp = (): AnyAction => {
   return {
-    type: types.SIGNUP
+    type: types.USER_SIGNUP
   };
 };
 
@@ -146,7 +146,7 @@ export const signUp = (): AnyAction => {
  */
 export const signUpSuccess = (payload: any): AnyAction => {
   return {
-    type: types.SIGNUP_SUCCESS,
+    type: types.USER_SIGNUP_SUCCESS,
     payload
   };
 };
@@ -157,7 +157,7 @@ export const signUpSuccess = (payload: any): AnyAction => {
  */
 export const signUpFail = (): AnyAction => {
   return {
-    type: types.SIGNUP_FAIL
+    type: types.USER_SIGNUP_FAIL
   };
 };
 
@@ -167,9 +167,9 @@ export const signUpFail = (): AnyAction => {
  *  Login success
  *  @type action creator
  */
-export const loginSuccess = (payload: AuthPayload): AnyAction => {
+export const loginSuccess = (payload: IUserPayload): AnyAction => {
   return {
-    type: types.LOGIN_SUCCESS,
+    type: types.USER_LOGIN_SUCCESS,
     payload
   };
 };
@@ -180,7 +180,7 @@ export const loginSuccess = (payload: AuthPayload): AnyAction => {
  */
 export const loginFail = (): AnyAction => {
   return {
-    type: types.LOGIN_FAIL
+    type: types.USER_LOGIN_FAIL
   };
 };
 
@@ -190,7 +190,7 @@ export const loginFail = (): AnyAction => {
  */
 export const login = (): AnyAction => {
   return {
-    type: types.LOGIN
+    type: types.USER_LOGIN
   };
 };
 
@@ -198,7 +198,7 @@ export const login = (): AnyAction => {
  *  Do login
  *  @type async action
  */
-export const doLogin = (token: AuthPayload): any => async (
+export const doLogin = (token: IUserPayload): any => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   dispatch(loginSuccess(token));
@@ -213,7 +213,7 @@ export const doLogin = (token: AuthPayload): any => async (
  */
 export const logout = (): AnyAction => {
   return {
-    type: types.LOGOUT
+    type: types.USER_LOGOUT
   };
 };
 

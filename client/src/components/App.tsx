@@ -8,7 +8,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import { getCurrentUser } from "../redux/actions/user.actions";
 import { isAdminPage } from "../utils";
-import { BackEnd, FrontEnd } from "./";
+import { Admin, Public } from "./";
 import { Preload } from "./ui";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
@@ -45,9 +45,9 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
        * Determine which app to load
        */}
       {isAdminPage(location) ? (
-        <BackEnd location={location} />
+        <Admin location={location} />
       ) : (
-        <FrontEnd location={location} />
+        <Public location={location} />
       )}
     </React.Fragment>
   );

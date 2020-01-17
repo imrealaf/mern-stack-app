@@ -1,5 +1,5 @@
+import Admin from "./Admin";
 import App from "./App";
-import BackEnd from "./BackEnd";
-import FrontEnd from "./FrontEnd";
+import Public from "./Public";
 
-export { App, FrontEnd, BackEnd };
+export { App, Public, Admin };

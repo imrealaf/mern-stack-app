@@ -25,6 +25,7 @@ $social-btn-size: 52px;
     justify-content: center;
     padding: 0;
     color: $white;
+    transition: all 0.3s ease;
 
     &.btn-facebook {
       background: #3b5998;
@@ -51,7 +52,7 @@ $social-btn-size: 52px;
     }
 
     &:hover {
-      background: $white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     }
 
     + .btn {

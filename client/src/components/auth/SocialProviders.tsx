@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./SocialProviders.scss";
 
-import authConfig from "../../constants/auth";
-import { getServerBase } from "../../utils";
+import providers from "../../data/auth/social-providers.json";
+import { getServerBase, interpolate } from "../../utils";
 
 /**
  *  Component name
@@ -26,13 +25,13 @@ const SocialProviders: React.FC<ISocialProvidersProps> & {
   return show ? (
     <div className={compName}>
       <p>or {action} with</p>
-      {authConfig.socialProviders.map((item: any, i: number) => {
+      {providers.map((item: any, i: number) => {
         return (
           <a
             key={i}
             className={`btn btn-${item.id}`}
-            href={getServerBase() + item.path}
-            title={item.title}
+            href={getServerBase() + interpolate(item.path)}
+            title={interpolate(item.title)}
           >
             <FontAwesomeIcon icon={["fab", item.icon]} size="2x" />
           </a>
