@@ -1,5 +1,5 @@
 export default {
-  APP_NAME: "MERN stack boilerplate",
+  APP_NAME: "MERN Stack App",
   API_ROOT: "/api",
 
   IS_SSL: false,
@@ -14,7 +14,7 @@ export default {
   JWT_EXPIRY: "8h",
 
   EMAIL_FROM_EMAIL: "no-reply@something.com",
-  EMAIL_FROM_NAME: "MERN stack boilerplate Team",
+  EMAIL_FROM_NAME: "MERN Stack App",
 
   AUTH_REQUIRE_USER_VERIFY: true
 };

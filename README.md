@@ -1,4 +1,4 @@
-# MERN Stack Application
+# MERN Stack App
 
 A powerful & elegant foundation for MERN Stack Applications w/ JWT Authentication & an Administration Panel
 
@@ -34,6 +34,7 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 - **React Helmet** for dynamic meta info for pages
 - **React FontAwesome** for icons
 - **Custom Hooks** for handling auth state, UI interaction etc.
+- **Admin Panel** for creating users etc.
 
 ### Back-End Routes
 
@@ -71,3 +72,10 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 #### Private
 
 - /dashboard - **Dashboard**
+
+### Admin Routes
+
+- /admin - **Admin Dashboard**
+- /admin/users - **View Users**
+- /admin/users/create - **Create User**
+- /admin/users/:id - **View/Edit User**
