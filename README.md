@@ -73,7 +73,7 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 - /dashboard - **Dashboard**
 
-### Admin Routes
+### Front-End Admin Routes
 
 - /admin - **Admin Dashboard**
 - /admin/users - **View Users**
