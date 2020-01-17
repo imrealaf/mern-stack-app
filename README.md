@@ -62,21 +62,21 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 
 #### Public
 
-- / - **Landing**
-- /login - **Login**
-- /sign-up - **Sign up**
-- /verify/:token - **Verify**
-- /resend-verify - **Resend Verification**
-- /auth/success/:token - **Social Auth Success**
-- /{page} - **Generic Page**
+- / --> **Landing**
+- /login --> **Login**
+- /sign-up --> **Sign up**
+- /verify/:token --> **Verify**
+- /resend-verify --> **Resend Verification**
+- /auth/success/:token --> **Social Auth Success**
+- /{page} --> **Generic Page**
 
 #### Private
 
-- /dashboard - **Dashboard**
+- /dashboard --> **Dashboard**
 
 ### Front-End Admin Routes
 
-- /admin - **Admin Dashboard**
-- /admin/users - **View Users**
-- /admin/users/create - **Create User**
-- /admin/users/:id - **View/Edit User**
+- /admin --> **Admin Dashboard**
+- /admin/users --> **View Users**
+- /admin/users/create --> **Create User**
+- /admin/users/:id --> **View/Edit User**
