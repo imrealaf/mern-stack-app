@@ -21,12 +21,11 @@ const compName = "login-form";
 interface ILoginFormProps {
   login: any;
   showSocial: boolean;
-  showSignUpLink: boolean;
 }
 
 const LoginForm: React.FC<ILoginFormProps> & {
   defaultProps: Partial<ILoginFormProps>;
-} = ({ login, showSocial, showSignUpLink }) => {
+} = ({ login, showSocial }) => {
   /**
    *  Read success query var
    */
@@ -112,7 +111,7 @@ const LoginForm: React.FC<ILoginFormProps> & {
 
         {showSocial ? <SocialProviders show={!login.data.email} /> : null}
 
-        {showSignUpLink && !login.data.email ? (
+        {!login.data.email ? (
           <div className="mt-3">
             <small>
               Don't have an account?{" "}
@@ -132,8 +131,7 @@ const LoginForm: React.FC<ILoginFormProps> & {
  *  Default props
  */
 LoginForm.defaultProps = {
-  showSocial: true,
-  showSignUpLink: true
+  showSocial: true
 };
 
 export default LoginForm;
