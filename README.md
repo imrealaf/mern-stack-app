@@ -15,13 +15,14 @@ A powerful & elegant foundation for MERN Stack Applications w/ JWT Authenticatio
 - **Dotenv** for handling of environment variables
 - **Jest** & **Supertest** for unit tests
 - **Express** implemented w/ Node **Cluster API** for performance optimization
-- **Passport** authentication w/ **JWT** for all major social networks and local email
+- **Passport** w/ **JWT** for social provider auth
 - **MongoDB** w/ Mongoose for database modeleing
 - **Logging** middleware
 - **GZIP compression** for compacting requests
 - **CORS** protection
 - **Helmet** for XSS protection & other security optimizations
-- **Email service** powered by **SendGrid** with configurable templates
+- **Email Service** powered by **SendGrid** with configurable templates
+- **Custom Library** with factories and utils to help with env & global tasks etc.
 
 ### Front-End Includes
 
