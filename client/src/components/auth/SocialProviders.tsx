@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./SocialProviders.scss";
+
 import authConfig from "../../constants/auth";
 import { getServerBase } from "../../utils";
 

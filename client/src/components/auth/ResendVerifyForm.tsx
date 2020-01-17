@@ -26,7 +26,8 @@ const ResendVerifyForm: React.FC<IResendVerifyFormProps> = ({ resend }) => {
         <Form
           noValidate={true}
           onSubmit={resend.onSubmitHandler}
-          className={compName}
+          id={compName}
+          className="auth-form"
           style={resend.pending ? { display: "none" } : {}}
         >
           {/* Error text */}

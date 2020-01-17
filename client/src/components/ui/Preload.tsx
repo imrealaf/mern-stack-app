@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import "./Preload.scss";
+
 import config from "../../constants/config";
 import { ThemeColor } from "../../types/Theme";
 import { onTransitionEnd } from "../../utils";
@@ -12,16 +14,14 @@ const compName = "preload";
 /**
  *  Props definition
  */
-interface Props {
+export interface IPreloadProps {
   color: ThemeColor;
   animateOut: boolean;
 }
 
-const Preload: React.FC<Props> & { defaultProps: Partial<Props> } = ({
-  children,
-  color,
-  animateOut
-}) => {
+export const Preload: React.FC<IPreloadProps> & {
+  defaultProps: Partial<IPreloadProps>;
+} = ({ children, color, animateOut }) => {
   /**
    *  Create state
    */
@@ -76,5 +76,3 @@ Preload.defaultProps = {
   color: "light",
   animateOut: false
 };
-
-export default Preload;

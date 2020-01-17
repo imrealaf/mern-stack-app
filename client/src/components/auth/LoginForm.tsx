@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import "./index.scss";
+
 import * as routes from "../../constants/routes";
 import { useQuery } from "../../hooks";
 import { sanitize } from "../../utils";
@@ -38,7 +40,8 @@ const LoginForm: React.FC<ILoginFormProps> & {
       <Form
         noValidate={true}
         onSubmit={login.onSubmitHandler}
-        className={compName}
+        id={compName}
+        className="auth-form"
         style={login.pending ? { display: "none" } : {}}
       >
         {/* Error text */}

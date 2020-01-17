@@ -1,7 +1,7 @@
 const NAMESPACE = "msb";
 
 export default {
-  appName: "MERN Stack Boilerplate",
+  appName: "MERN Stack App",
   namespace: NAMESPACE,
   meta: {
     titleSeperator: "-"

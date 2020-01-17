@@ -1,6 +1,8 @@
 import React from "react";
 import { useSwipeable } from "react-swipeable";
 
+import "./SidePanel.scss";
+
 import { IUseToggle } from "../../hooks/useToggle";
 
 /**

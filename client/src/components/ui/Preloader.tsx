@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Preloader.scss";
+
 import { ThemeColor } from "../../types/Theme";
 
 /**
@@ -10,13 +12,13 @@ const compName = "preloader";
 /**
  *  Props definition
  */
-interface IPreloaderProps {
+export interface IPreloaderProps {
   show: boolean;
   color: ThemeColor;
   text?: string;
 }
 
-const Preloader: React.FC<IPreloaderProps> & {
+export const Preloader: React.FC<IPreloaderProps> & {
   defaultProps: Partial<IPreloaderProps>;
 } = ({ show, color, text }) => {
   return show ? (
@@ -39,5 +41,3 @@ Preloader.defaultProps = {
   show: false,
   color: "primary"
 };
-
-export default Preloader;

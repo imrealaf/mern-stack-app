@@ -1,6 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
+import "./Hero.scss";
+
 import { ViewHeight } from "../../types/Misc";
 
 /**
@@ -11,7 +13,7 @@ const compName = "hero";
 /**
  *  Props definition
  */
-interface IHeroProps {
+export interface IHeroProps {
   bg: string;
   text: string;
   image?: string | undefined;
@@ -21,7 +23,7 @@ interface IHeroProps {
   overlayOpacity: number;
 }
 
-const Preloader: React.FC<IHeroProps> & {
+export const Hero: React.FC<IHeroProps> & {
   defaultProps: Partial<IHeroProps>;
 } = ({ children, bg, vh, image, fluid, text, overlay, overlayOpacity }) => {
   /**
@@ -38,10 +40,10 @@ const Preloader: React.FC<IHeroProps> & {
    *  Styles generation
    */
   const styles = (): any => {
-    const styles: any = {};
-    if (vh) styles.height = `${vh}vh`;
-    if (image) styles.backgroundImage = `url(${image})`;
-    return styles;
+    const s: any = {};
+    if (vh) s.height = `${vh}vh`;
+    if (image) s.backgroundImage = `url(${image})`;
+    return s;
   };
 
   /**
@@ -50,7 +52,6 @@ const Preloader: React.FC<IHeroProps> & {
   return (
     <div className={className()} style={styles()}>
       {overlay ? (
-        
         <div
           className={`${compName}_overlay`}
           style={{ opacity: overlayOpacity }}
@@ -66,12 +67,10 @@ const Preloader: React.FC<IHeroProps> & {
 /**
  *  Default props
  */
-Preloader.defaultProps = {
+Hero.defaultProps = {
   bg: "light",
   text: "dark",
   fluid: false,
   overlay: false,
   overlayOpacity: 0.5
 };
-
-export default Preloader;

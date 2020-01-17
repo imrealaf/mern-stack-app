@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
+import "./Landing.scss";
+
 import * as routes from "../../../constants/routes";
 import data from "../../../data/landing";
 import { sanitize } from "../../../utils";
@@ -25,10 +27,10 @@ const Landing: React.FC<IPageProps> = ({ isAuthenticated }) => {
   return (
     <Page descrip="This is the home page">
       {/* Hero */}
-      <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.8}>
+      <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.9}>
         <div className="text-center text-white">
           <h1
-            className="display-4"
+            className="display-3"
             dangerouslySetInnerHTML={sanitize(data.heading)}
           />
           <h5
@@ -44,7 +46,7 @@ const Landing: React.FC<IPageProps> = ({ isAuthenticated }) => {
             </Link>
             <Link
               to={routes.LOGIN}
-              className="btn btn-secondary btn-pill btn-lg ml-3"
+              className="btn bg-white text-dark btn-pill btn-lg ml-3"
             >
               Log In
             </Link>

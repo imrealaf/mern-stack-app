@@ -40,7 +40,8 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
         <Form
           noValidate={true}
           onSubmit={signUp.onSubmitHandler}
-          className={compName}
+          id={compName}
+          className="auth-form"
           style={signUp.pending ? { display: "none" } : {}}
         >
           {/* Error text */}

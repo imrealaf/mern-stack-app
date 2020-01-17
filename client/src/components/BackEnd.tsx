@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./BackEnd.scss";
+
 import { AdminNavigation } from "./navigation";
 import { BackRoutes } from "./routes";
 
