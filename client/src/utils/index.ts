@@ -2,8 +2,8 @@ import moment, { Moment } from "moment";
 import sanitizeHtml from "sanitize-html";
 
 import config from "../constants/config";
-import dictionary from "../constants/dictionary";
 import * as routes from "../constants/routes";
+import { buildDictionary } from "../utils/dictionary";
 
 export const getCurrentRoute = (
   location: any,
@@ -88,7 +88,7 @@ export const classBuilder = (mandatory: string[], conditional: any[]) => {
   return classes;
 };
 
-const extract = (arr: string[]) => {
+export const extract = (arr: string[]) => {
   const beg = arr[0];
   const end = arr[1];
   const matcher = new RegExp(`${beg}(.*?)${end}`, "gm");
@@ -101,21 +101,33 @@ const extract = (arr: string[]) => {
   };
 };
 
-export const interpolate = (str: string) => {
+export const interpolate = (
+  str: string,
+  start: string = "{",
+  end: string = "}",
+  datasrc: any = buildDictionary()
+) => {
   let output = str;
-  const extractor = extract(["{", "}"]);
+  const extractor = extract([start, end]);
   const vars = extractor(output);
-  const data = dictionary as any;
+  const data = datasrc as any;
 
   if (vars.length) {
     for (const key of vars) {
       if (typeof data[key] !== undefined && data[key]) {
-        const re = new RegExp(`{${key}}`, "g");
+        const re = new RegExp(`${start}${key}${end}`, "g");
         output = output.replace(re, data[key]);
+        console.log(output);
       }
     }
   }
 
+  return output;
+};
+
+export const parseConfigValues = (str: string) => {
+  let output = str;
+  output = interpolate(str, "{", "}", config);
   return output;
 };
 

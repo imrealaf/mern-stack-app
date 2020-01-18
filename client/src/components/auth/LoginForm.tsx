@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 
 import * as routes from "../../constants/routes";
+import { dictionary } from "../../data";
 import providers from "../../data/auth/social-providers.json";
 import { useQuery } from "../../hooks";
 import { IUseLogin } from "../../hooks/auth/useLogin";

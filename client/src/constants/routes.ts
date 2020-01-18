@@ -1,4 +1,4 @@
-import config from "./config";
+export const API_BASE = "/api";
 
 /////////////////////// F R O N T - E N D //////////////////////
 
@@ -40,5 +40,5 @@ export const AUTH_SUCCESS = `/auth/success/:token`;
 /**
  *  API - Users
  */
-export const API_USERS = `${config.apiBase}/users`;
-export const API_USERS_VERIFY = `${config.apiBase}/users/verify`;
+export const API_USERS = `${API_BASE}/users`;
+export const API_USERS_VERIFY = `${API_BASE}/users/verify`;

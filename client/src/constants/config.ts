@@ -30,5 +30,6 @@ export default {
       "*": ["href", "data-*", "alt", "class"]
     },
     allowProtocolRelative: true
-  }
+  },
+  minPasswordLength: 6
 };

@@ -1,0 +1,6 @@
+{
+  "APP_NAME": "MERN Stack App",
+  "AUTH_PASSWORD_MIN": "Password must be at least {minPasswordLength} characters",
+  "AUTH_PASSWORD_MATCH": "Confirmed password must match the above",
+  "AUTH_INVALID_EMAIL": "Not a valid email"
+}

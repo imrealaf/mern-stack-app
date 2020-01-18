@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
+import { dictionary } from "../../data";
 import { sanitize } from "../../utils";
 import { Preloader } from "../ui";
 import { SocialProviders } from "./";
@@ -107,7 +108,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
               />
               {signUp.passwordNotValid() ? (
                 <Form.Text className="text-secondary">
-                  {config.auth.validationErrors().passwordMinLength}
+                  {dictionary.AUTH_PASSWORD_MIN}
                 </Form.Text>
               ) : null}
             </Form.Group>
@@ -128,7 +129,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
               />
               {signUp.passwordsDontMatch() ? (
                 <Form.Text className="text-secondary">
-                  {config.auth.validationErrors().passwordMatch}
+                  {dictionary.AUTH_PASSWORD_MATCH}
                 </Form.Text>
               ) : null}
             </Form.Group>

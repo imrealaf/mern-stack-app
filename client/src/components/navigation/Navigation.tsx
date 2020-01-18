@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import "./Navigation.scss";
 
 import { SideNav } from ".";
-import config from "../../constants/config";
 import { privateNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
+import { dictionary } from "../../data";
 import { genericPages } from "../../data";
 import { useLogout, useToggle } from "../../hooks";
 import { IUser } from "../../modules/user";
@@ -80,7 +80,7 @@ export const NavComponent: React.FC<INavigationProps> & {
               icon={["fas", "code"]}
               size="1x"
             />{" "}
-            <strong>{config.appName}</strong>
+            <strong>{dictionary.APP_NAME}</strong>
           </Link>
 
           {/* Side nav toggle */}
