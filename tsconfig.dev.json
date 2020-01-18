@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "noUnusedLocals": false,
-    "noUnusedParameters": false
-  },
-  "extends": "./tsconfig"
-}
