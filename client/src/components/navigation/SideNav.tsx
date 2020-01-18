@@ -3,14 +3,14 @@ import { Col, Nav, Row } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 
 import defaultPhoto from "../../assets/default-profile-photo.png";
-import { NavigationLink } from "../../types/Navigation";
-import { IUser } from "../../types/User";
+import { IUser } from "../../modules/user";
 import { ISidePanelProps, SidePanel } from "../ui/SidePanel";
+import { INavigationLink } from "./Navigation";
 
 /**
  *  Props definition
  */
-interface ISideNavProps {
+export interface ISideNavProps {
   id?: string;
   panel: ISidePanelProps;
   user: IUser | null;
@@ -18,7 +18,7 @@ interface ISideNavProps {
   bottomItems?: any;
 }
 
-const SideNav: React.FC<ISideNavProps> & {
+const SideNavComponent: React.FC<ISideNavProps> & {
   defaultProps: Partial<ISideNavProps>;
 } = ({ id, panel, user, mainItems, bottomItems, children }) => {
   /*
@@ -37,7 +37,7 @@ const SideNav: React.FC<ISideNavProps> & {
    *  Get items function
    */
   const getItems = () => {
-    return mainItems.map((item: NavigationLink, i: number) => {
+    return mainItems.map((item: INavigationLink, i: number) => {
       return (
         <React.Fragment key={i}>
           <NavLink className="nav-link px-0" to={item.path}>
@@ -107,11 +107,11 @@ const SideNav: React.FC<ISideNavProps> & {
 /**
  *  Default props
  */
-SideNav.defaultProps = {
+SideNavComponent.defaultProps = {
   id: "",
   user: undefined,
   mainItems: [],
   bottomItems: []
 };
 
-export default SideNav;
+export const SideNav = SideNavComponent;

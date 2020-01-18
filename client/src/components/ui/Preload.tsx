@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Preload.scss";
 
 import config from "../../constants/config";
-import { ThemeColor } from "../../types/Theme";
+import { ThemeColor } from "../../index.d";
 import { onTransitionEnd } from "../../utils";
 
 /**

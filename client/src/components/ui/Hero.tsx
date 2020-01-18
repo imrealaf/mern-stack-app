@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 import "./Hero.scss";
 
-import { ViewHeight } from "../../types/Misc";
+import { ViewHeight } from "../../index.d";
 
 /**
  *  Component name

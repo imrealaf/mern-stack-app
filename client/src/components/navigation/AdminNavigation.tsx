@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Button, Container, Navbar, NavbarProps } from "react-bootstrap";
+import { Button, Container, Navbar } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -9,23 +9,15 @@ import config from "../../constants/config";
 import { adminNav, adminUserNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
 import { useLogout, useToggle } from "../../hooks";
-import { IUser } from "../../types/User";
 import { ISidePanelProps } from "../ui/SidePanel";
+import { INavigationProps } from "./Navigation";
 
 /*
  *  Component name
  */
 const compName = "navigation";
 
-/*
- *  Props definition
- */
-interface INavigationProps extends NavbarProps {
-  shadow: boolean;
-  user: IUser;
-}
-
-const Navigation: React.FC<INavigationProps> & {
+const AdminNavigationComponent: React.FC<INavigationProps> & {
   defaultProps: Partial<INavigationProps>;
 } = ({ user, shadow, ...rest }) => {
   /*
@@ -134,7 +126,7 @@ const Navigation: React.FC<INavigationProps> & {
 /*
  *  Default props
  */
-Navigation.defaultProps = {
+AdminNavigationComponent.defaultProps = {
   bg: "dark",
   shadow: true,
   variant: "dark",
@@ -149,4 +141,7 @@ const mapStateToProps = (state: any) => {
   return { user: data };
 };
 
-export default connect(mapStateToProps, {})(Navigation);
+export const AdminNavigation = connect(
+  mapStateToProps,
+  {}
+)(AdminNavigationComponent);

@@ -1,6 +1,9 @@
 import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
 
-import { RequestMethod } from "../types/Request";
+/**
+ *  Request methods type
+ */
+export type RequestMethod = "get" | "post" | "put" | "delete";
 
 /**
  *  Send request method

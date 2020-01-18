@@ -12,7 +12,7 @@ import { privateNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
 import { genericPages } from "../../data";
 import { useLogout, useToggle } from "../../hooks";
-import { IUser } from "../../types/User";
+import { IUser } from "../../modules/user";
 
 /*
  *  Component name
@@ -20,16 +20,25 @@ import { IUser } from "../../types/User";
 const compName = "navigation";
 
 /*
+ *  Nav link definition
+ */
+export interface INavigationLink {
+  id?: string;
+  title: string;
+  path: string;
+}
+
+/*
  *  Props definition
  */
-interface INavigationProps extends NavbarProps {
+export interface INavigationProps extends NavbarProps {
   shadow: boolean;
   isAuthenticated: boolean;
   user: IUser;
   loading: boolean;
 }
 
-const Navigation: React.FC<INavigationProps> & {
+export const NavComponent: React.FC<INavigationProps> & {
   defaultProps: Partial<INavigationProps>;
 } = ({ isAuthenticated, loading, user, shadow, ...rest }) => {
   /*
@@ -116,7 +125,7 @@ const Navigation: React.FC<INavigationProps> & {
 /*
  *  Default props
  */
-Navigation.defaultProps = {
+NavComponent.defaultProps = {
   bg: "dark",
   shadow: true,
   variant: "dark",
@@ -131,4 +140,4 @@ const mapStateToProps = (state: any) => {
   return { isAuthenticated, loading, user: data };
 };
 
-export default connect(mapStateToProps, {})(Navigation);
+export const Navigation = connect(mapStateToProps, {})(NavComponent);

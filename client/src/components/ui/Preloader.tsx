@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Preloader.scss";
 
-import { ThemeColor } from "../../types/Theme";
+import { ThemeColor } from "../../index.d";
 
 /**
  *  Component name
