@@ -17,13 +17,24 @@ export interface ISidePanelProps extends IUseToggle {
   id?: string;
   position?: string;
   bg?: string;
+  color?: string;
   shadow?: boolean;
   onCanvas?: boolean;
 }
 
 export const SidePanel: React.FC<ISidePanelProps> & {
   defaultProps: Partial<ISidePanelProps>;
-} = ({ id, children, position, bg, shadow, show, handleClose, onCanvas }) => {
+} = ({
+  id,
+  children,
+  position,
+  bg,
+  shadow,
+  color,
+  show,
+  handleClose,
+  onCanvas
+}) => {
   /**
    *  Swipe handling
    */
@@ -37,6 +48,7 @@ export const SidePanel: React.FC<ISidePanelProps> & {
    */
   const classNames = () => {
     const classes = [compName, `${compName}-${position}`, `bg-${bg}`];
+    if (color) classes.push(`text-${color}`);
     if (onCanvas) classes.push(`${compName}-oncanvas`);
     if (shadow) classes.push(`${compName}-shadow`);
     if (show) {
@@ -70,6 +82,7 @@ SidePanel.defaultProps = {
   id: "",
   position: "right",
   bg: "light",
+  color: undefined,
   shadow: true,
   show: false,
   onCanvas: false

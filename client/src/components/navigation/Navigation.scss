@@ -47,11 +47,15 @@
     }
 
     &.nav-toggle-right {
-      right: 10px;
+      right: 15px;
     }
 
     &.nav-toggle-left {
-      left: 10px;
+      left: 15px;
+    }
+
+    &.nav-toggle-lg {
+      font-size: 1.3rem;
     }
   }
 

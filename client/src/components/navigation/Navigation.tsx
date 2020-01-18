@@ -13,6 +13,7 @@ import { dictionary } from "../../data";
 import { genericPages } from "../../data";
 import { useLogout, useToggle } from "../../hooks";
 import { IUser } from "../../modules/user";
+import { ISidePanelProps } from "../ui/SidePanel";
 
 /*
  *  Component name
@@ -50,6 +51,17 @@ export const NavComponent: React.FC<INavigationProps> & {
    *  Panel api
    */
   const panel = useToggle();
+  const authPanel = useToggle();
+
+  /*
+   *  Main nav config (side panel)
+   */
+  const sideNavOptions: ISidePanelProps = {
+    ...panel,
+    position: "left",
+    bg: "primary",
+    color: "white"
+  };
 
   /*
    *  Classes function
@@ -83,6 +95,13 @@ export const NavComponent: React.FC<INavigationProps> & {
             <strong>{dictionary.APP_NAME}</strong>
           </Link>
 
+          <a
+            className="nav-toggle nav-toggle-left nav-toggle-lg text-white"
+            onClick={panel.toggle}
+          >
+            <FontAwesomeIcon className="mr-1" icon={["fas", "bars"]} />
+          </a>
+
           {/* Side nav toggle */}
           {isAuthenticated && user && !loading ? (
             <Navbar.Toggle
@@ -94,13 +113,17 @@ export const NavComponent: React.FC<INavigationProps> & {
         </Container>
       </Navbar>
 
+      <SideNav user={null} panel={sideNavOptions}>
+        nav
+      </SideNav>
+
       {/**
        * Side navigation
        */}
       {isAuthenticated && user && !loading ? (
         <SideNav
           user={user}
-          panel={panel}
+          panel={authPanel}
           mainItems={privateNav}
           bottomItems={genericPages}
         >
