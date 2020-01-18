@@ -5,7 +5,7 @@ import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
-import { doLogin, login, loginFail } from "../../redux/actions/user.actions";
+import { userActions } from "../../modules/user";
 import { sendRequest } from "../../utils/http";
 
 /**
@@ -91,7 +91,7 @@ export const useLogin = (): IUseLogin => {
     setSubmitted(true);
 
     if (valid) {
-      dispatch(login());
+      dispatch(userActions.login());
       setPending(true);
       setTimeout(submit, 2000);
     }
@@ -113,7 +113,7 @@ export const useLogin = (): IUseLogin => {
       setPending(false);
 
       // Dispatch success action
-      dispatch(doLogin(response.data));
+      dispatch(userActions.doLogin(response.data));
 
       // Login fail ..
     } catch (error) {
@@ -123,7 +123,7 @@ export const useLogin = (): IUseLogin => {
       // Set and dispatch errors
       setPending(false);
       setErrors(err);
-      dispatch(loginFail());
+      dispatch(userActions.loginFail());
     }
   };
 

@@ -3,6 +3,7 @@ import sanitizeHtml from "sanitize-html";
 
 import config from "../constants/config";
 import dictionary from "../constants/dictionary";
+import * as routes from "../constants/routes";
 
 export const getCurrentRoute = (
   location: any,
@@ -100,11 +101,11 @@ const extract = (arr: string[]) => {
   };
 };
 
-export const interpolate = (str: string) => {
+export const interpolate = (str: string, route: boolean = false) => {
   let output = str;
   const extractor = extract(["{", "}"]);
   const vars = extractor(output);
-  const data = dictionary as any;
+  const data = route ? routes : (dictionary as any);
 
   if (vars.length) {
     for (const key of vars) {

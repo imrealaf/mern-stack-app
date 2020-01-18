@@ -5,11 +5,7 @@ import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
-import {
-  doVerify,
-  verifyFail,
-  verifySuccess
-} from "../../redux/actions/user.actions";
+import { userActions } from "../../modules/user";
 import { sendRequest } from "../../utils/http";
 
 /**
@@ -41,7 +37,7 @@ export default (token: string | undefined): IUseVerify => {
    */
   useEffect(() => {
     if (token) {
-      dispatch(doVerify());
+      dispatch(userActions.doVerify());
       setPending(true);
       setTimeout(verify, config.preload.delayTime + 1000);
     }
@@ -62,13 +58,13 @@ export default (token: string | undefined): IUseVerify => {
       );
 
       setPending(false);
-      dispatch(verifySuccess());
+      dispatch(userActions.verifySuccess());
       setMessage(response.data.message);
       setIsVerified(true);
     } catch (error) {
       setPending(false);
       setError(error.response.data.message);
-      dispatch(verifyFail());
+      dispatch(userActions.verifyFail());
     }
   };
 

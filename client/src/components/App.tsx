@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import { getCurrentUser } from "../redux/actions/user.actions";
+import { userActions } from "../modules/user";
 import { isAdminPage } from "../utils";
 import { Admin, Public } from "./";
 import { Preload } from "./ui";
@@ -22,7 +22,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
    */
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCurrentUser());
+    dispatch(userActions.getCurrentUser());
   }, []);
 
   /*

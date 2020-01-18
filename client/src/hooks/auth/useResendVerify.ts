@@ -4,11 +4,7 @@ import { useDispatch } from "react-redux";
 import validator from "validator";
 
 import * as routes from "../../constants/routes";
-import {
-  resendVerify,
-  resendVerifyFail,
-  resendVerifySuccess
-} from "../../redux/actions/user.actions";
+import { userActions } from "../../modules/user";
 import { sendRequest } from "../../utils/http";
 
 /**
@@ -94,7 +90,7 @@ export const useResendVerify = (): IUseResendVerify => {
     setSubmitted(true);
 
     if (valid) {
-      dispatch(resendVerify());
+      dispatch(userActions.resendVerify());
       setPending(true);
       setTimeout(submit, 2000);
     }
@@ -116,7 +112,7 @@ export const useResendVerify = (): IUseResendVerify => {
       setPending(false);
 
       // Dispatch success action
-      dispatch(resendVerifySuccess());
+      dispatch(userActions.resendVerifySuccess());
       setSuccess(true);
 
       // Fail ..
@@ -127,7 +123,7 @@ export const useResendVerify = (): IUseResendVerify => {
       // Set and dispatch errors
       setPending(false);
       setErrors(err);
-      dispatch(resendVerifyFail());
+      dispatch(userActions.resendVerifyFail());
     }
   };
 

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { doLogout } from "../../redux/actions/user.actions";
+import { userActions } from "../../modules/user";
 
 /**
  *  Hook api interface
@@ -20,7 +20,7 @@ export const useLogout = (): IUseLogout => {
    *  Logout method
    */
   const logout = () => {
-    dispatch(doLogout());
+    dispatch(userActions.doLogout());
   };
 
   /**

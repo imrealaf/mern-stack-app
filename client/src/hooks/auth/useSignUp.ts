@@ -4,11 +4,7 @@ import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
-import {
-  signUp,
-  signUpFail,
-  signUpSuccess
-} from "../../redux/actions/user.actions";
+import { userActions } from "../../modules/user";
 import { sendRequest } from "../../utils/http";
 
 /**
@@ -145,7 +141,7 @@ export const useSignUp = (): IUseSignUp => {
     setSubmitted(true);
 
     if (valid) {
-      dispatch(signUp());
+      dispatch(userActions.signUp());
       setPending(true);
       setTimeout(submit, config.http.requestDelay);
     }
@@ -166,14 +162,14 @@ export const useSignUp = (): IUseSignUp => {
       if (response.data.verifyToken) {
         setVerify(response.data.message);
         dispatch(
-          signUpSuccess({
+          userActions.signUpSuccess({
             user: null,
             verify: true
           })
         );
       } else {
         dispatch(
-          signUpSuccess({
+          userActions.signUpSuccess({
             user: response.data.user,
             verify: false
           })
@@ -183,7 +179,7 @@ export const useSignUp = (): IUseSignUp => {
       const err = [error.response.data];
       setPending(false);
       setErrors(err);
-      dispatch(signUpFail());
+      dispatch(userActions.signUpFail());
     }
   };
 

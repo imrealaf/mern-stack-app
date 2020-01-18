@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 
 import * as routes from "../../../constants/routes";
-import { loginSuccess } from "../../../redux/actions/user.actions";
+import { loginSuccess } from "../../../modules/user/user.actions";
 import { IPageProps } from "../../hoc/Page";
 
 const AuthSuccess: React.FC<IPageProps> = ({ isAuthenticated }) => {

@@ -4,6 +4,8 @@ import { Button, Container, Navbar, NavbarProps } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import "./Navigation.scss";
+
 import { SideNav } from ".";
 import config from "../../constants/config";
 import { privateNav } from "../../constants/navigation";
