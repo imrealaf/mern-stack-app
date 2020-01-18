@@ -3,8 +3,6 @@ import { Container } from "react-bootstrap";
 
 import "./Hero.scss";
 
-import { ViewHeight } from "../../index.d";
-
 /**
  *  Component name
  */
@@ -17,7 +15,7 @@ export interface IHeroProps {
   bg: string;
   text: string;
   image?: string | undefined;
-  vh?: ViewHeight;
+  vh?: 25 | 50 | 75 | 100;
   fluid: boolean;
   overlay: boolean;
   overlayOpacity: number;

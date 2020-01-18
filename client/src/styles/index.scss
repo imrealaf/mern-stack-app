@@ -7,9 +7,7 @@
 // Vendor
 @import "vendor";
 
-// Global
+// App
 @import "global";
-@import "components/Button";
-
-// Extended utilities
 @import "utilities";
+@import "abstract/buttons";
