@@ -101,11 +101,11 @@ const extract = (arr: string[]) => {
   };
 };
 
-export const interpolate = (str: string, route: boolean = false) => {
+export const interpolate = (str: string) => {
   let output = str;
   const extractor = extract(["{", "}"]);
   const vars = extractor(output);
-  const data = route ? routes : (dictionary as any);
+  const data = dictionary as any;
 
   if (vars.length) {
     for (const key of vars) {

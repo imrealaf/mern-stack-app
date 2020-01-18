@@ -1,4 +1,4 @@
-import privacy from "./privacy";
-import terms from "./terms";
+import privacy from "./public/pages/privacy.json";
+import terms from "./public/pages/terms.json";
 
-export default [privacy, terms];
+export const genericPages = [privacy, terms];

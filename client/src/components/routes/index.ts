@@ -1,4 +1,4 @@
-import BackRoutes from "./BackRoutes";
-import FrontRoutes from "./FrontRoutes";
+import AdminRoutes from "./AdminRoutes";
+import PublicRoutes from "./PublicRoutes";
 
-export { FrontRoutes, BackRoutes };
+export { PublicRoutes, AdminRoutes };

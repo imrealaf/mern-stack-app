@@ -3,7 +3,7 @@ import React from "react";
 import "./Admin.scss";
 
 import { AdminNavigation } from "./navigation";
-import { BackRoutes } from "./routes";
+import { AdminRoutes } from "./routes";
 
 /*
  *  Props definition
@@ -27,7 +27,7 @@ const BackEnd: React.FC<IBackEndProps> = ({ location }) => {
        * Main
        */}
       <main id="main" role="main">
-        <BackRoutes />
+        <AdminRoutes />
       </main>
     </React.Fragment>
   );

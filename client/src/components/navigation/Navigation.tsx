@@ -10,7 +10,7 @@ import { SideNav } from ".";
 import config from "../../constants/config";
 import { privateNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
-import pages from "../../data";
+import { genericPages } from "../../data";
 import { useLogout, useToggle } from "../../hooks";
 import { IUser } from "../../types/User";
 
@@ -93,7 +93,7 @@ const Navigation: React.FC<INavigationProps> & {
           user={user}
           panel={panel}
           mainItems={privateNav}
-          bottomItems={pages}
+          bottomItems={genericPages}
         >
           {user.role === "admin" ? (
             <Link className="nav-link px-0" to="/admin">

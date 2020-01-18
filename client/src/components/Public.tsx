@@ -3,7 +3,7 @@ import React from "react";
 import * as routes from "../constants/routes";
 import { isAuthPage } from "../utils/auth";
 import { Navigation } from "./navigation";
-import { FrontRoutes } from "./routes";
+import { PublicRoutes } from "./routes";
 
 /*
  *  Props definition
@@ -34,7 +34,7 @@ const FrontEnd: React.FC<IFrontEndProps> = ({ location }) => {
        * Main
        */}
       <main id="main" role="main">
-        <FrontRoutes />
+        <PublicRoutes />
       </main>
     </React.Fragment>
   );

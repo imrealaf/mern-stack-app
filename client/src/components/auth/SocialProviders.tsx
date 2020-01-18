@@ -30,8 +30,8 @@ const SocialProviders: React.FC<ISocialProvidersProps> & {
           <a
             key={i}
             className={`btn btn-${item.id}`}
-            href={getServerBase() + interpolate(item.path, true)}
-            title={interpolate(item.title, true)}
+            href={getServerBase() + interpolate(item.path)}
+            title={interpolate(item.title)}
           >
             <FontAwesomeIcon icon={["fab", item.icon]} size="2x" />
           </a>

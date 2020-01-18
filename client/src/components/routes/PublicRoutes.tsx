@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import * as routes from "../../constants/routes";
-import pages from "../../data";
+import { genericPages } from "../../data";
 import { PrivateRoute } from "../hoc";
 import {
   AuthSuccess,
@@ -89,7 +89,7 @@ const Routes: React.FC = () => {
        * @route /{page}
        * @access public
        */}
-      {pages.map((page: any, i) => {
+      {genericPages.map((page: any, i) => {
         return (
           <Route key={i} exact={true} path={page.path}>
             <Generic {...page} />
