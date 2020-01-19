@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 
 import env from "../lib/env";
+import message from "../lib/message";
 import { IUser, User } from "../models/user.model";
 import { DbService } from "../services/database";
 
@@ -34,12 +35,14 @@ export default (app: Application) => {
       it("1. Should fail because of missing required field", async () => {
         const res = await request(app)
           .post("/api/users")
-          .send(userCreds)
+          .send({
+            email: userCreds.email
+          })
           .expect(400)
           .expect("Content-Type", /json/);
 
         expect(res.body.message).toBeDefined();
-        expect(res.body.message.length).toBeGreaterThan(1);
+        expect(res.body.message).toBe(message.get("auth_password_required"));
       });
 
       it("2. Should create new user with verification token", async () => {
@@ -59,13 +62,18 @@ export default (app: Application) => {
         expect(verifyToken.length).toBe(
           env.get("AUTH_VERIFY_TOKEN_LENGTH") * 2
         );
+        expect(res.body.message).toBe(
+          message.get("users_create_success_verify")
+        );
       });
 
       it("3. User should not be able to log in because account not verified", async () => {
         const res = await request(app)
           .post("/auth/email")
           .send(userCreds)
-          .expect(400);
+          .expect(400)
+          .expect("Content-Type", /json/);
+        expect(res.body.message).toBe(message.get("auth_email_verify"));
       });
     });
 

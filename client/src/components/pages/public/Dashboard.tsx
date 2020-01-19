@@ -12,7 +12,7 @@ const Dashboard: React.FC<IPageProps> = ({ loading, user }) => {
       {!loading && user !== null ? (
         <React.Fragment>
           {/* Hero */}
-          <Jumbotron fluid={true} className="bg-gray-800 py-5">
+          <Jumbotron fluid={true} className="bg-gray-600 py-5">
             <Container className="text-white">
               <h1>Dashboard</h1>
               <span className="divider bg-primary my-3" />

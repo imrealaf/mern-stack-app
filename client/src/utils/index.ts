@@ -67,7 +67,7 @@ export const isAdminPage = (location: any) => {
   return location.pathname.split("/")[1] === "admin";
 };
 
-export const classBuilder = (mandatory: string[], conditional: any[]) => {
+export const classBuilder = (mandatory: string[], conditional: any[] = []) => {
   const classes = [...mandatory];
 
   if (conditional && conditional.length) {

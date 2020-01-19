@@ -59,7 +59,7 @@ export const NavComponent: React.FC<INavigationProps> & {
   const sideNavOptions: ISidePanelProps = {
     ...panel,
     position: "left",
-    bg: "primary",
+    bg: "gray-900",
     color: "white"
   };
 
@@ -104,11 +104,12 @@ export const NavComponent: React.FC<INavigationProps> & {
 
           {/* Side nav toggle */}
           {isAuthenticated && user && !loading ? (
-            <Navbar.Toggle
-              className={rest.variant === "dark" ? "text-white" : "text-dark"}
-              aria-controls="sidepanel"
-              onClick={panel.toggle}
-            />
+            <a
+              className="nav-toggle nav-toggle-right nav-toggle-lg text-white"
+              onClick={authPanel.toggle}
+            >
+              <FontAwesomeIcon className="mr-1" icon={["fas", "user-cog"]} />
+            </a>
           ) : null}
         </Container>
       </Navbar>
@@ -133,7 +134,7 @@ export const NavComponent: React.FC<INavigationProps> & {
             </Link>
           ) : null}
           <Button
-            variant="outline-secondary"
+            variant="outline-dark"
             className="btn-pill btn-sm mt-3 px-3"
             onClick={logout}
           >

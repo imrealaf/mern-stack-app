@@ -5,7 +5,14 @@
 @import "../../styles/vendor/bootstrap/utils.scss";
 
 .navigation {
+  .container-fluid {
+    display: flex;
+    align-items: center;
+  }
+
   .navbar-brand {
+    display: inline-flex;
+    align-items: center;
     font-weight: 300;
 
     .is-admin-page & {
