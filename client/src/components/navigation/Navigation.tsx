@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import "./Navigation.scss";
 
 import { SideNav } from ".";
-import { privateNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
 import { dictionary } from "../../data";
 import { genericPages } from "../../data";
+import privateNav from "../../data/public/navigation/nav.authenticated.json";
+import publicNav from "../../data/public/navigation/nav.json";
 import { useLogout, useToggle } from "../../hooks";
 import { IUser } from "../../modules/user";
 import { ISidePanelProps } from "../ui/SidePanel";
@@ -114,9 +115,11 @@ export const NavComponent: React.FC<INavigationProps> & {
         </Container>
       </Navbar>
 
-      <SideNav user={null} panel={sideNavOptions}>
-        nav
-      </SideNav>
+      <SideNav
+        user={null}
+        mainItems={publicNav}
+        panel={sideNavOptions}
+      />
 
       {/**
        * Side navigation

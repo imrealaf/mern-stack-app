@@ -134,5 +134,5 @@ export const parseConfigValues = (str: string) => {
 export const sanitize = (str: string, parseData: boolean = true) => {
   let output = str;
   if (parseData) output = interpolate(output);
-  return { __html: sanitizeHtml(output, config.sanitizeHtml) };
+  return { __html: sanitizeHtml(output, config.SANITIZE_HTML) };
 };

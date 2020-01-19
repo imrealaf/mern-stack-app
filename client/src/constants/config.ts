@@ -1,35 +1,16 @@
 const NAMESPACE = "msb";
 
 export default {
-  appName: "MERN Stack App",
-  namespace: NAMESPACE,
-  meta: {
-    titleSeperator: "-"
-  },
-  preload: {
-    delayTime: 1500
-  },
-  apiBase: "/api",
-  auth: {
-    minPasswordLength: 6,
-    validationErrors() {
-      return {
-        usernameValidEmail: "Not a valid email",
-        passwordMinLength: `Password must be at least ${this.minPasswordLength} chars`,
-        passwordMatch: `Confirmed password must match the above`
-      };
-    },
-    tokenStorageName: `${NAMESPACE}_token`
-  },
-  http: {
-    requestDelay: 2000,
-    responseDelay: 0
-  },
-  sanitizeHtml: {
+  NAMESPACE,
+  META_TITLE_SEPERATOR: "-",
+  PRELOAD_TIME: 1500,
+  TOKEN_STORAGE_NAME: `${NAMESPACE}_token`,
+  HTTP_DELAY: 2000,
+  SANITIZE_HTML: {
     allowedAttributes: {
       "*": ["href", "data-*", "alt", "class"]
     },
     allowProtocolRelative: true
   },
-  minPasswordLength: 6
+  MIN_PASSWORD_LENGTH: 6
 };

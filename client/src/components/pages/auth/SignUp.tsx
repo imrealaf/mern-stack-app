@@ -4,8 +4,8 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import config from "../../../constants/config";
 import * as routes from "../../../constants/routes";
+import { dictionary } from "../../../data";
 import { useSignUp } from "../../../hooks";
 import { SignUpForm } from "../../auth";
 import { IPageProps, Page } from "../../hoc/Page";
@@ -38,7 +38,7 @@ const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
                 icon={["fas", "code"]}
                 size="1x"
               />{" "}
-              <span>{config.appName}</span>
+              <span>{dictionary.APP_NAME}</span>
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
                 Sign Up
               </small>

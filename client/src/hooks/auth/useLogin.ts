@@ -138,8 +138,7 @@ export const useLogin = (): IUseLogin => {
    * Validate password function
    */
   const validPassword = () => {
-    return data.password &&
-      data.password.length >= config.auth.minPasswordLength
+    return data.password && data.password.length >= config.MIN_PASSWORD_LENGTH
       ? true
       : false;
   };

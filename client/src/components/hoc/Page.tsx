@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
 import config from "../../constants/config";
+import { dictionary } from "../../data";
 import { getCurrentRoute, isAdminPage } from "../../utils";
 
 /**
@@ -54,8 +55,8 @@ export const Page: React.FC<IPageProps> & {
   return (
     <React.Fragment>
       <Helmet
-        titleTemplate={`%s ${config.meta.titleSeperator} ${config.appName}`}
-        defaultTitle={config.appName}
+        titleTemplate={`%s ${config.META_TITLE_SEPERATOR} ${dictionary.APP_NAME}`}
+        defaultTitle={dictionary.APP_NAME}
       >
         <title>{title ? title : ""}</title>
         {descrip ? <meta name="description" content={descrip} /> : null}
