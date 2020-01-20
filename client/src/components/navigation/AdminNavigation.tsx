@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { SideNav } from ".";
-import config from "../../constants/config";
-import { adminNav, adminUserNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
+import { dictionary } from "../../data";
+import mainNav from "../../data/admin/navigation/admin.nav.main.json";
+import userNav from "../../data/admin/navigation/admin.nav.user.json";
 import { useLogout, useToggle } from "../../hooks";
 import { ISidePanelProps } from "../ui/SidePanel";
 import { INavigationProps } from "./Navigation";
@@ -71,7 +72,7 @@ const AdminNavigationComponent: React.FC<INavigationProps> & {
               icon={["fas", "code"]}
               size="1x"
             />{" "}
-            <strong>{config.appName}</strong>
+            <strong>{dictionary.APP_NAME}</strong>
           </Link>
 
           <a
@@ -102,14 +103,14 @@ const AdminNavigationComponent: React.FC<INavigationProps> & {
         id="main-nav"
         user={null}
         panel={navPanelOptions}
-        mainItems={adminNav}
+        mainItems={mainNav}
       />
 
       {/**
        * Side navigation
        */}
       {user ? (
-        <SideNav user={user} panel={userPanel} mainItems={adminUserNav}>
+        <SideNav user={user} panel={userPanel} mainItems={userNav}>
           <Button
             variant="outline-secondary"
             className="btn-pill btn-sm mt-3 px-3"

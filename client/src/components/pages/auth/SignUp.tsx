@@ -1,14 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import config from "../../../constants/config";
 import * as routes from "../../../constants/routes";
 import { useSignUp } from "../../../hooks";
 import { SignUpForm } from "../../auth";
 import { IPageProps, Page } from "../../hoc/Page";
+import { Logo } from "../../ui";
 
 const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
   /**
@@ -33,12 +32,7 @@ const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
             lg={{ span: 4, offset: 4 }}
           >
             <h4 className="mb-4 text-primary">
-              <FontAwesomeIcon
-                className="mr-1"
-                icon={["fas", "code"]}
-                size="1x"
-              />{" "}
-              <span>{config.appName}</span>
+              <Logo color="dark" />
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
                 Sign Up
               </small>

@@ -195,7 +195,7 @@ class UsersController implements IUsersController {
         return res.json({
           userId: user._id,
           verifyToken: token.token,
-          message: message.get("auth_email_verify_fail")
+          message: message.get("users_create_success_verify")
         });
 
         /**

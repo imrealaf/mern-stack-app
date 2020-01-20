@@ -67,7 +67,7 @@ export const isAdminPage = (location: any) => {
   return location.pathname.split("/")[1] === "admin";
 };
 
-export const classBuilder = (mandatory: string[], conditional: any[]) => {
+export const classBuilder = (mandatory: string[], conditional: any[] = []) => {
   const classes = [...mandatory];
 
   if (conditional && conditional.length) {
@@ -131,8 +131,13 @@ export const parseConfigValues = (str: string) => {
   return output;
 };
 
-export const sanitize = (str: string, parseData: boolean = true) => {
+export const sanitize = (
+  str: string | undefined,
+  parseData: boolean = true
+) => {
   let output = str;
-  if (parseData) output = interpolate(output);
-  return { __html: sanitizeHtml(output, config.sanitizeHtml) };
+  if (output && parseData) output = interpolate(output);
+  return output
+    ? { __html: sanitizeHtml(output, config.SANITIZE_HTML) }
+    : undefined;
 };

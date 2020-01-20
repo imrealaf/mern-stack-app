@@ -6,20 +6,13 @@ import "./Generic.scss";
 import { sanitize } from "../../../utils";
 import { IPageProps, Page } from "../../hoc/Page";
 
-/**
- *  Props definition
- */
-interface IGenericProps extends IPageProps {
-  content: string;
-}
-
-const Generic: React.FC<IGenericProps> = ({ title, descrip, content }) => {
+const Generic: React.FC<IPageProps> = ({ title, description, content }) => {
   return (
-    <Page title={title} descrip={descrip} classes={["page-generic"]}>
+    <Page title={title} description={description} classes={["page-generic"]}>
       <div id="content" className="mt-5">
-        <Container className="py-4">
+        <Container>
           <h1>{title}</h1>
-          <span className="divider bg-gray-300 my-3" />
+          <span className="divider bg-gray-300 mt-3 mb-4" />
           <div dangerouslySetInnerHTML={sanitize(content)} />
         </Container>
       </div>

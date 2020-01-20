@@ -3,6 +3,8 @@ import { Container } from "react-bootstrap";
 
 import "./Hero.scss";
 
+import { ThemeColor } from "../../index.d";
+
 /**
  *  Component name
  */
@@ -12,8 +14,8 @@ const compName = "hero";
  *  Props definition
  */
 export interface IHeroProps {
-  bg: string;
-  text: string;
+  bg: ThemeColor;
+  text: ThemeColor;
   image?: string | undefined;
   vh?: 25 | 50 | 75 | 100;
   fluid: boolean;

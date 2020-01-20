@@ -9,10 +9,10 @@ import { Preloader } from "../../ui";
 const Dashboard: React.FC<IPageProps> = ({ loading, user }) => {
   return (
     <Page title="Dashboard" classes={["navbar-is-fixed"]}>
-      {!loading && user !== null ? (
+      {!loading && user ? (
         <React.Fragment>
           {/* Hero */}
-          <Jumbotron fluid={true} className="bg-gray-800 py-5">
+          <Jumbotron fluid={true} className="bg-gray-600 py-5">
             <Container className="text-white">
               <h1>Dashboard</h1>
               <span className="divider bg-primary my-3" />

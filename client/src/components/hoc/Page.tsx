@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
 import config from "../../constants/config";
+import { dictionary } from "../../data";
+import { IUser } from "../../modules/user";
 import { getCurrentRoute, isAdminPage } from "../../utils";
 
 /**
@@ -11,16 +13,18 @@ import { getCurrentRoute, isAdminPage } from "../../utils";
 export interface IPageProps {
   classes?: string[];
   title?: string;
-  descrip?: string;
+  description?: string;
+  content?: string;
+  path?: string;
   isAuthenticated?: boolean;
-  user?: any;
+  user?: IUser;
   isAdmin?: boolean;
   loading?: boolean;
 }
 
 export const Page: React.FC<IPageProps> & {
   defaultProps: Partial<IPageProps>;
-} = ({ children, title, descrip, classes }) => {
+} = ({ children, title, description, classes }) => {
   /**
    *  Location api
    */
@@ -54,11 +58,11 @@ export const Page: React.FC<IPageProps> & {
   return (
     <React.Fragment>
       <Helmet
-        titleTemplate={`%s ${config.meta.titleSeperator} ${config.appName}`}
-        defaultTitle={config.appName}
+        titleTemplate={`%s ${config.META_TITLE_SEPERATOR} ${dictionary.APP_NAME}`}
+        defaultTitle={dictionary.APP_NAME}
       >
         <title>{title ? title : ""}</title>
-        {descrip ? <meta name="description" content={descrip} /> : null}
+        {description ? <meta name="description" content={description} /> : null}
         <body className={className()} data-route={currentRoute} />
       </Helmet>
       {children}
@@ -70,5 +74,9 @@ export const Page: React.FC<IPageProps> & {
  *  Default props
  */
 Page.defaultProps = {
-  classes: []
+  classes: [],
+  title: "",
+  description: "",
+  content: "",
+  path: ""
 };

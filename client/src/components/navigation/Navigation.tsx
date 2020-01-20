@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 import "./Navigation.scss";
 
 import { SideNav } from ".";
-import { privateNav } from "../../constants/navigation";
 import * as routes from "../../constants/routes";
 import { dictionary } from "../../data";
 import { genericPages } from "../../data";
+import privateNav from "../../data/public/navigation/nav.authenticated.json";
+import publicNav from "../../data/public/navigation/nav.json";
 import { useLogout, useToggle } from "../../hooks";
 import { IUser } from "../../modules/user";
+import { Logo } from "../ui";
 import { ISidePanelProps } from "../ui/SidePanel";
 
 /*
@@ -59,7 +61,7 @@ export const NavComponent: React.FC<INavigationProps> & {
   const sideNavOptions: ISidePanelProps = {
     ...panel,
     position: "left",
-    bg: "primary",
+    bg: "gray-900",
     color: "white"
   };
 
@@ -87,12 +89,7 @@ export const NavComponent: React.FC<INavigationProps> & {
             to={isAuthenticated ? routes.DASHBOARD : routes.LANDING}
             className="navbar-brand text-white mx-auto"
           >
-            <FontAwesomeIcon
-              className="mr-1"
-              icon={["fas", "code"]}
-              size="1x"
-            />{" "}
-            <strong>{dictionary.APP_NAME}</strong>
+            <Logo />
           </Link>
 
           <a
@@ -104,36 +101,35 @@ export const NavComponent: React.FC<INavigationProps> & {
 
           {/* Side nav toggle */}
           {isAuthenticated && user && !loading ? (
-            <Navbar.Toggle
-              className={rest.variant === "dark" ? "text-white" : "text-dark"}
-              aria-controls="sidepanel"
-              onClick={panel.toggle}
-            />
+            <a
+              className="nav-toggle nav-toggle-right nav-toggle-lg text-white"
+              onClick={authPanel.toggle}
+            >
+              <FontAwesomeIcon className="mr-1" icon={["fas", "user-cog"]} />
+            </a>
           ) : null}
         </Container>
       </Navbar>
 
-      <SideNav user={null} panel={sideNavOptions}>
-        nav
-      </SideNav>
+      <SideNav
+        user={null}
+        mainItems={publicNav}
+        panel={sideNavOptions}
+        bottomItems={genericPages}
+      />
 
       {/**
        * Side navigation
        */}
       {isAuthenticated && user && !loading ? (
-        <SideNav
-          user={user}
-          panel={authPanel}
-          mainItems={privateNav}
-          bottomItems={genericPages}
-        >
+        <SideNav user={user} panel={authPanel} mainItems={privateNav}>
           {user.role === "admin" ? (
             <Link className="nav-link px-0" to="/admin">
               Admin
             </Link>
           ) : null}
           <Button
-            variant="outline-secondary"
+            variant="outline-dark"
             className="btn-pill btn-sm mt-3 px-3"
             onClick={logout}
           >

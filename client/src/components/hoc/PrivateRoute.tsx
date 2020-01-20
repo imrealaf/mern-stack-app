@@ -8,7 +8,7 @@ import * as routes from "../../constants/routes";
  *  Props definition
  */
 interface IPrivateRouteProps extends RouteProps {
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   loading: boolean;
   admin?: boolean;
   isAdmin: boolean;

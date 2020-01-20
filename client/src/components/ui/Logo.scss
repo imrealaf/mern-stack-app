@@ -1,0 +1,31 @@
+/**
+ *  Logo
+ */
+
+@import "../../styles/vendor/bootstrap/utils.scss";
+
+.logo {
+  display: inline-flex;
+  width: auto;
+  align-items: center;
+
+  span {
+    position: relative;
+    top: 2px;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    font-family: "Josefin Sans";
+  }
+
+  &.logo-lg {
+    svg {
+      font-size: 2em;
+    }
+  }
+
+  &.logo-xl {
+    svg {
+      font-size: 4em;
+    }
+  }
+}

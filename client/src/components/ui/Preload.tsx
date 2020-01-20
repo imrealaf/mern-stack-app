@@ -48,7 +48,7 @@ export const Preload: React.FC<IPreloadProps> & {
         document.body.style.overflow = "";
         setShow(false);
       }
-    }, config.preload.delayTime);
+    }, config.PRELOAD_TIME);
   }, []);
 
   /**

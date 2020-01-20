@@ -39,7 +39,7 @@ export default (token: string | undefined): IUseVerify => {
     if (token) {
       dispatch(userActions.doVerify());
       setPending(true);
-      setTimeout(verify, config.preload.delayTime + 1000);
+      setTimeout(verify, config.PRELOAD_TIME + 1000);
     }
   }, [token]);
 

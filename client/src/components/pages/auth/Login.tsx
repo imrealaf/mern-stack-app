@@ -1,14 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import config from "../../../constants/config";
 import * as routes from "../../../constants/routes";
 import { useLogin } from "../../../hooks";
 import { LoginForm } from "../../auth";
 import { IPageProps, Page } from "../../hoc/Page";
+import { Logo } from "../../ui";
 
 const Login: React.FC<IPageProps> = ({ isAuthenticated }) => {
   /**
@@ -35,13 +34,8 @@ const Login: React.FC<IPageProps> = ({ isAuthenticated }) => {
             md={{ span: 6, offset: 3 }}
             lg={{ span: 4, offset: 4 }}
           >
-            <h4 className="mb-4 text-primary">
-              <FontAwesomeIcon
-                className="mr-1"
-                icon={["fas", "code"]}
-                size="1x"
-              />{" "}
-              <span>{config.appName}</span>
+            <h4 className="mb-4">
+              <Logo color="dark" />
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
                 Login
               </small>

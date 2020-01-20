@@ -1,14 +1,12 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, Redirect, useParams } from "react-router-dom";
 
-import config from "../../../constants/config";
 import * as routes from "../../../constants/routes";
 import { useVerify } from "../../../hooks";
 import { IPageProps, Page } from "../../hoc/Page";
-import { Preloader } from "../../ui";
+import { Logo, Preloader } from "../../ui";
 
 const Verify: React.FC<IPageProps> = ({ isAuthenticated }) => {
   /**
@@ -41,12 +39,7 @@ const Verify: React.FC<IPageProps> = ({ isAuthenticated }) => {
             lg={{ span: 4, offset: 4 }}
           >
             <h4 className="mb-4 text-primary">
-              <FontAwesomeIcon
-                className="mr-1"
-                icon={["fas", "code"]}
-                size="1x"
-              />{" "}
-              <span>{config.appName}</span>
+              <Logo color="dark" />
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
                 Verify You Account
               </small>

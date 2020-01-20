@@ -24,21 +24,21 @@ export const hasAuthToken = (): boolean => {
  *  Get auth token
  */
 export const getAuthToken = (): string | null => {
-  return localStorage.getItem(config.auth.tokenStorageName);
+  return localStorage.getItem(config.TOKEN_STORAGE_NAME);
 };
 
 /**
  *  Set auth token
  */
 export const setAuthToken = (token: string): void => {
-  localStorage.setItem(config.auth.tokenStorageName, token);
+  localStorage.setItem(config.TOKEN_STORAGE_NAME, token);
 };
 
 /**
  *  Remove auth token
  */
 export const removeAuthToken = (): void => {
-  localStorage.removeItem(config.auth.tokenStorageName);
+  localStorage.removeItem(config.TOKEN_STORAGE_NAME);
 };
 
 /**

@@ -1,6 +1,6 @@
 {
   "title": "",
   "descrip": "",
-  "heading": "<strong class=\"text-primary\">{APP_NAME}</strong>",
+  "heading": "<p class=\"text-upper text-secondary text-spaced-lg text-lg mb-2\">Introducing</p><strong class=\"text-primary text-logo\">{APP_NAME}</strong>",
   "subheading": "Insert really cool catch phrase here"
 }

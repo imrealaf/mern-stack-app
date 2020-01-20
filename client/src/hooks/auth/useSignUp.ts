@@ -73,7 +73,7 @@ export const useSignUp = (): IUseSignUp => {
     const emailValid = email && validator.isEmail(email);
     const passwordValid =
       password &&
-      password.length <= config.auth.minPasswordLength &&
+      password.length <= config.MIN_PASSWORD_LENGTH &&
       password === passwordConfirm;
 
     if (name && emailValid && passwordValid) {
@@ -88,7 +88,7 @@ export const useSignUp = (): IUseSignUp => {
    */
   const passwordNotValid = () => {
     const { password } = data;
-    return password && password.length < config.auth.minPasswordLength
+    return password && password.length < config.MIN_PASSWORD_LENGTH
       ? true
       : false;
   };
@@ -143,7 +143,7 @@ export const useSignUp = (): IUseSignUp => {
     if (valid) {
       dispatch(userActions.signUp());
       setPending(true);
-      setTimeout(submit, config.http.requestDelay);
+      setTimeout(submit, config.HTTP_DELAY);
     }
   };
 

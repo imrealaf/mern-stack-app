@@ -1,0 +1,10 @@
+[
+  {
+    "title": "My Account",
+    "path": "{ADMIN_DASHBOARD}"
+  },
+  {
+    "title": "View Website",
+    "path": "{LANDING}"
+  }
+]

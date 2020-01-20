@@ -25,7 +25,7 @@ const Landing: React.FC<IPageProps> = ({ isAuthenticated }) => {
    *  Render
    */
   return (
-    <Page descrip="This is the home page">
+    <Page description="This is the home page">
       {/* Hero */}
       <Hero image={heroImage} vh={100} overlay={true} overlayOpacity={0.7}>
         <div className="text-center text-white">
