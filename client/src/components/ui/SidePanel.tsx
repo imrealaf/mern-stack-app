@@ -4,6 +4,7 @@ import { useSwipeable } from "react-swipeable";
 import "./SidePanel.scss";
 
 import { IUseToggle } from "../../hooks/useToggle";
+import { ThemeColor } from "../../index.d";
 
 /**
  *  Component name
@@ -16,8 +17,8 @@ const compName = "sidepanel";
 export interface ISidePanelProps extends IUseToggle {
   id?: string;
   position?: string;
-  bg?: string;
-  color?: string;
+  bg?: ThemeColor;
+  color?: ThemeColor;
   shadow?: boolean;
   onCanvas?: boolean;
 }

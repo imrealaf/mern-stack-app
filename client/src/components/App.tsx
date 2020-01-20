@@ -9,7 +9,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { userActions } from "../modules/user";
 import { isAdminPage } from "../utils";
 import { Admin, Public } from "./";
-import { Preload } from "./ui";
+import { Logo, Preload } from "./ui";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   /*
@@ -34,11 +34,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
        * Preload
        */}
       <Preload animateOut={true} color="primary">
-        <FontAwesomeIcon
-          className="text-white"
-          icon={["fas", "code"]}
-          size="4x"
-        />
+        <Logo text={false} size="xl" />
       </Preload>
 
       {/**

@@ -12,6 +12,10 @@
   line-height: 1 !important;
 }
 
+.text-xl {
+  font-size: 1.5rem !important;
+}
+
 .text-lg {
   font-size: 1.2rem !important;
 }
@@ -30,6 +34,14 @@
 
 .text-spaced {
   letter-spacing: 3px;
+}
+
+.text-spaced-lg {
+  letter-spacing: 6px;
+}
+
+.text-logo {
+  font-family: "Josefin Sans";
 }
 
 // Font

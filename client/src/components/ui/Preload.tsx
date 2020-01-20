@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Preload.scss";
 
 import config from "../../constants/config";
+import { ThemeColor } from "../../index.d";
 import { onTransitionEnd } from "../../utils";
 
 /**
@@ -14,7 +15,7 @@ const compName = "preload";
  *  Props definition
  */
 export interface IPreloadProps {
-  color: string;
+  color: ThemeColor;
   animateOut: boolean;
 }
 

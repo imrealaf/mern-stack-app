@@ -14,6 +14,7 @@ import privateNav from "../../data/public/navigation/nav.authenticated.json";
 import publicNav from "../../data/public/navigation/nav.json";
 import { useLogout, useToggle } from "../../hooks";
 import { IUser } from "../../modules/user";
+import { Logo } from "../ui";
 import { ISidePanelProps } from "../ui/SidePanel";
 
 /*
@@ -88,12 +89,7 @@ export const NavComponent: React.FC<INavigationProps> & {
             to={isAuthenticated ? routes.DASHBOARD : routes.LANDING}
             className="navbar-brand text-white mx-auto"
           >
-            <FontAwesomeIcon
-              className="mr-1"
-              icon={["fas", "code"]}
-              size="1x"
-            />{" "}
-            <strong>{dictionary.APP_NAME}</strong>
+            <Logo />
           </Link>
 
           <a
@@ -119,18 +115,14 @@ export const NavComponent: React.FC<INavigationProps> & {
         user={null}
         mainItems={publicNav}
         panel={sideNavOptions}
+        bottomItems={genericPages}
       />
 
       {/**
        * Side navigation
        */}
       {isAuthenticated && user && !loading ? (
-        <SideNav
-          user={user}
-          panel={authPanel}
-          mainItems={privateNav}
-          bottomItems={genericPages}
-        >
+        <SideNav user={user} panel={authPanel} mainItems={privateNav}>
           {user.role === "admin" ? (
             <Link className="nav-link px-0" to="/admin">
               Admin

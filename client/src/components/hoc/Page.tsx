@@ -12,10 +12,10 @@ import { getCurrentRoute, isAdminPage } from "../../utils";
  */
 export interface IPageProps {
   classes?: string[];
-  title: string;
-  description: string;
-  content: string;
-  path: string;
+  title?: string;
+  description?: string;
+  content?: string;
+  path?: string;
   isAuthenticated?: boolean;
   user?: IUser;
   isAdmin?: boolean;

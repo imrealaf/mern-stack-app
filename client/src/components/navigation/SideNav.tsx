@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 
 import defaultPhoto from "../../assets/default-profile-photo.png";
 import { IUser } from "../../modules/user";
+import { interpolate } from "../../utils";
 import { ISidePanelProps, SidePanel } from "../ui/SidePanel";
 import { INavigationLink } from "./Navigation";
 
@@ -40,7 +41,7 @@ const SideNavComponent: React.FC<ISideNavProps> & {
     return mainItems.map((item: INavigationLink, i: number) => {
       return (
         <React.Fragment key={i}>
-          <NavLink className="nav-link px-0" to={item.path}>
+          <NavLink className="nav-link px-0" to={interpolate(item.path)}>
             {item.title}
           </NavLink>
         </React.Fragment>
@@ -56,10 +57,8 @@ const SideNavComponent: React.FC<ISideNavProps> & {
       return (
         <React.Fragment key={i}>
           <NavLink
-            className={`nav-link text-sm text-secondary p-0${
-              i > 0 ? " ml-3" : ""
-            }`}
-            to={item.path}
+            className={`nav-link text-sm text-secondary px-0 py-1`}
+            to={interpolate(item.path)}
           >
             {item.title}
           </NavLink>
@@ -97,7 +96,7 @@ const SideNavComponent: React.FC<ISideNavProps> & {
 
       {bottomItems.length ? (
         <div className="sidepanel_bottom">
-          <Nav>{getBottomItems()}</Nav>
+          <Nav className="d-block">{getBottomItems()}</Nav>
         </div>
       ) : null}
     </SidePanel>
