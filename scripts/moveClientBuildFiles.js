@@ -5,6 +5,12 @@ const distDir = "./dist/public";
 
 const moveFiles = async () => {
   try {
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir);
+    }
+
+    fs.chmodSync(distDir, 777);
+
     await fs.emptyDir(distDir);
     console.log("Public folder cleaned..");
 
