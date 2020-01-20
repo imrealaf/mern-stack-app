@@ -159,7 +159,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
             <div className="mt-3">
               <small>
                 Already have an account?{" "}
-                <Link to={routes.LOGIN}>
+                <Link to={routes.LOGIN} className="text-dark">
                   <strong>Login</strong>
                 </Link>
               </small>

@@ -32,7 +32,7 @@ const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
             lg={{ span: 4, offset: 4 }}
           >
             <h4 className="mb-4 text-primary">
-              <Logo color="primary" />
+              <Logo color="dark" />
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
                 Sign Up
               </small>
