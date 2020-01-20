@@ -32,5 +32,5 @@ export const middlewaresToLoad = [
   helmet(),
   compression(),
   express.json(),
-  express.static(path.resolve(__dirname, "public"))
+  express.static(path.resolve(__dirname, "../client/build"))
 ];

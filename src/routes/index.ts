@@ -32,7 +32,7 @@ export default (app: Application) => {
    */
   if (env.get("NODE_ENV") === "production") {
     app.get("*", (req: Request, res: Response) => {
-      res.sendFile(path.resolve(__dirname, "../public/index.html"));
+      res.sendFile(path.resolve(__dirname, "../../client/build/index.html"));
     });
   }
 };

@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "build": "npm run build:server && npm run build:client",
     "build:server": "tsc",
-    "build:client": "cd client && npm install && npm run build && npm run client:deploy",
+    "build:client": "cd client && npm install && npm run build",
     "client:deploy": "node scripts/moveClientBuildFiles.js",
     "dev:client": "npm run start --prefix client",
     "dev:server": "cross-env NODE_ENV=development concurrently -k \"npm run watch:ts\" \"npm run watch:node\"",
