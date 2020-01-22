@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
+import "./Page.scss";
+
 import config from "../../constants/config";
 import { dictionary } from "../../data";
 import { IUser } from "../../modules/user";
@@ -31,14 +33,18 @@ export const Page: React.FC<IPageProps> & {
   const location = useLocation();
 
   /**
-   *  Route state ..
+   *  State ..
    */
+  const [show, setShow] = useState(false);
   const [currentRoute, setCurrentRoute] = useState(null) as any;
 
   /**
    *  On route change ..
    */
   useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 0);
     setCurrentRoute(getCurrentRoute(location, "landing"));
   }, [location, setCurrentRoute]);
 
@@ -65,7 +71,7 @@ export const Page: React.FC<IPageProps> & {
         {description ? <meta name="description" content={description} /> : null}
         <body className={className()} data-route={currentRoute} />
       </Helmet>
-      {children}
+      <div className={`page${show ? " in" : ""}`}>{children}</div>
     </React.Fragment>
   );
 };
