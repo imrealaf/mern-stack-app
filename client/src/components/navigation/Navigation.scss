@@ -5,6 +5,13 @@
 @import "../../styles/vendor/bootstrap/utils.scss";
 
 .navigation {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.in {
+    opacity: 1;
+  }
+
   .container-fluid {
     display: flex;
     align-items: center;

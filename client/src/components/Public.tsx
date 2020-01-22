@@ -4,6 +4,7 @@ import * as routes from "../constants/routes";
 import { isAuthPage } from "../utils/auth";
 import { Navigation } from "./navigation";
 import { PublicRoutes } from "./routes";
+import { LoadImages } from "./ui";
 
 /*
  *  Props definition
@@ -36,6 +37,11 @@ const FrontEnd: React.FC<IFrontEndProps> = ({ location }) => {
       <main id="main" role="main">
         <PublicRoutes />
       </main>
+
+      {/**
+       * Preload images
+       */}
+      <LoadImages images={["/images/landing.jpg"]} />
     </React.Fragment>
   );
 };

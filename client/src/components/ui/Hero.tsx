@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
 
 import "./Hero.scss";
@@ -26,13 +26,23 @@ export interface IHeroProps {
 export const Hero: React.FC<IHeroProps> & {
   defaultProps: Partial<IHeroProps>;
 } = ({ children, bg, vh, image, fluid, text, overlay, overlayOpacity }) => {
+  const ref = useRef() as any;
+
+  useEffect(() => {
+    if (image) {
+      setTimeout(() => {
+        ref.current.classList.remove("hero-preload");
+      }, 100);
+    }
+  }, []);
+
   /**
    *  Class name generation
    */
   const className = (): string => {
     const classes = [compName, `bg-${bg}`, `text-${text}`];
     if (vh) classes.push("has-vh");
-    if (image) classes.push("has-image");
+    if (image) classes.push("has-image hero-preload");
     return classes.join(" ");
   };
 
@@ -50,7 +60,7 @@ export const Hero: React.FC<IHeroProps> & {
    *  Render
    */
   return (
-    <div className={className()} style={styles()}>
+    <div className={className()} style={styles()} ref={ref}>
       {overlay ? (
         <div
           className={`${compName}_overlay`}

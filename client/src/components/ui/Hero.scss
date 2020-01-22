@@ -26,6 +26,7 @@
     z-index: 1;
     background: $black;
     opacity: 0.5;
+    transition: all 0.5s ease;
   }
 
   h1 {
@@ -50,5 +51,11 @@
   &.has-image {
     background: no-repeat center center;
     background-size: cover;
+  }
+
+  &.hero-preload {
+    .hero_overlay {
+      opacity: 1 !important;
+    }
   }
 }

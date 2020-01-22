@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Navbar, NavbarProps } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./Navigation.scss";
 
@@ -45,6 +45,12 @@ export const NavComponent: React.FC<INavigationProps> & {
   defaultProps: Partial<INavigationProps>;
 } = ({ isAuthenticated, loading, user, shadow, ...rest }) => {
   /*
+   * State
+   */
+  const location = useLocation();
+  const [show, setShow] = useState(false);
+
+  /*
    *  Logout api
    */
   const logout = useLogout();
@@ -65,12 +71,18 @@ export const NavComponent: React.FC<INavigationProps> & {
     color: "white"
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 50);
+  }, [location]);
+
   /*
    *  Classes function
    */
   const className = (): string => {
     const classes = [compName];
-    if (shadow) classes.push(`${compName}-shadow`);
+    if (show) classes.push("in");
     return classes.join(" ");
   };
 
@@ -82,7 +94,7 @@ export const NavComponent: React.FC<INavigationProps> & {
       {/**
        * Navbar
        */}
-      <Navbar className={className()} {...rest}>
+      <Navbar className={`${className()}${show ? " in" : ""}`} {...rest}>
         <Container fluid={true}>
           {/* Logo */}
           <Link
