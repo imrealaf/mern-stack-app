@@ -1,6 +1,7 @@
 {
   "title": "",
   "descrip": "",
+  "image": "/media/landing.jpg",
   "heading": "<p class=\"text-upper text-secondary text-spaced-lg text-lg mb-2\">Introducing</p><strong class=\"text-primary text-logo\">{APP_NAME}</strong>",
   "subheading": "Insert really cool catch phrase here"
 }

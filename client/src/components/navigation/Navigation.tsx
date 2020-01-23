@@ -8,7 +8,6 @@ import "./Navigation.scss";
 
 import { SideNav } from ".";
 import * as routes from "../../constants/routes";
-import { dictionary } from "../../data";
 import { genericPages } from "../../data";
 import privateNav from "../../data/public/navigation/nav.authenticated.json";
 import publicNav from "../../data/public/navigation/nav.json";
@@ -39,13 +38,14 @@ export interface INavigationProps extends NavbarProps {
   isAuthenticated: boolean;
   user: IUser;
   loading: boolean;
+  timeout: number;
 }
 
 export const NavComponent: React.FC<INavigationProps> & {
   defaultProps: Partial<INavigationProps>;
-} = ({ isAuthenticated, loading, user, shadow, ...rest }) => {
+} = ({ isAuthenticated, loading, user, shadow, timeout, ...rest }) => {
   /*
-   * State
+   * State/location for fading
    */
   const location = useLocation();
   const [show, setShow] = useState(false);
@@ -71,20 +71,19 @@ export const NavComponent: React.FC<INavigationProps> & {
     color: "white"
   };
 
+  /*
+   *  On route change, fade nav in
+   */
   useEffect(() => {
     setTimeout(() => {
       setShow(true);
-    }, 50);
+    }, timeout);
   }, [location]);
 
   /*
-   *  Classes function
+   *  Classname
    */
-  const className = (): string => {
-    const classes = [compName];
-    if (show) classes.push("in");
-    return classes.join(" ");
-  };
+  const className = compName + (show ? " in" : "");
 
   /*
    *  Render
@@ -94,7 +93,7 @@ export const NavComponent: React.FC<INavigationProps> & {
       {/**
        * Navbar
        */}
-      <Navbar className={`${className()}${show ? " in" : ""}`} {...rest}>
+      <Navbar className={className} {...rest}>
         <Container fluid={true}>
           {/* Logo */}
           <Link
@@ -104,21 +103,21 @@ export const NavComponent: React.FC<INavigationProps> & {
             <Logo />
           </Link>
 
-          <a
+          <button
             className="nav-toggle nav-toggle-left nav-toggle-lg text-white"
             onClick={panel.toggle}
           >
             <FontAwesomeIcon className="mr-1" icon={["fas", "bars"]} />
-          </a>
+          </button>
 
           {/* Side nav toggle */}
           {isAuthenticated && user && !loading ? (
-            <a
+            <button
               className="nav-toggle nav-toggle-right nav-toggle-lg text-white"
               onClick={authPanel.toggle}
             >
               <FontAwesomeIcon className="mr-1" icon={["fas", "user-cog"]} />
-            </a>
+            </button>
           ) : null}
         </Container>
       </Navbar>
@@ -160,7 +159,8 @@ NavComponent.defaultProps = {
   bg: "dark",
   shadow: true,
   variant: "dark",
-  expand: false
+  expand: false,
+  timeout: 50
 };
 
 /**

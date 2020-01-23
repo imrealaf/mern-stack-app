@@ -20,6 +20,8 @@ export const DASHBOARD = "/dashboard";
 
 export const ADMIN_DASHBOARD = "/admin";
 export const ADMIN_USERS = "/admin/users";
+export const ADMIN_USERS_CREATE = "/admin/users/create";
+export const ADMIN_USERS_EDIT = "/admin/users/edit/:id";
 
 /////////////////////// A U T H //////////////////////
 

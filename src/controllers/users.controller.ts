@@ -230,7 +230,7 @@ class UsersController implements IUsersController {
       // Server error ..
     } catch (error) {
       console.error(error.message);
-      return res.status(500).send(message.get("error_500"));
+      return res.status(500).send(`${message.get("error_500")}: ${error.message}`);
     }
   }
 

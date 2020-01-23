@@ -4,9 +4,18 @@
 
 @import "../../styles/vendor/bootstrap/utils.scss";
 
+$nav-height: 56px;
+$nav-transition-duration: 0.3s;
+$nav-brand-font-weight: 300;
+$nav-shadow: 0 0 $grid-gutter-width/2 rgba(0, 0, 0, 0.3);
+$nav-toggle-padding: 0.3rem;
+$nav-toggle-gutter: $grid-gutter-width/2;
+$nav-toggle-size: 1rem;
+$nav-toggle-size-lg: 1.3rem;
+
 .navigation {
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity $nav-transition-duration ease;
 
   &.in {
     opacity: 1;
@@ -20,38 +29,13 @@
   .navbar-brand {
     display: inline-flex;
     align-items: center;
-    font-weight: 300;
-
-    .is-admin-page & {
-      @include media-breakpoint-down(md) {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      @include media-breakpoint-down(xs) {
-        font-size: 0.9rem;
-      }
-    }
-  }
-
-  .navbar-toggler {
-    border: none;
-    position: absolute;
-    right: 10px;
-
-    .is-admin-page & {
-      right: initial;
-      left: 10px;
-      display: none;
-
-      @include media-breakpoint-down(md) {
-        display: inline-block;
-      }
-    }
+    font-weight: $nav-brand-font-weight;
   }
 
   .nav-toggle {
-    padding: 0.3rem;
+    background: none;
+    border: none;
+    padding: $nav-toggle-padding;
     display: inline-block;
     cursor: pointer;
 
@@ -61,15 +45,15 @@
     }
 
     &.nav-toggle-right {
-      right: 15px;
+      right: $nav-toggle-gutter;
     }
 
     &.nav-toggle-left {
-      left: 15px;
+      left: $nav-toggle-gutter;
     }
 
     &.nav-toggle-lg {
-      font-size: 1.3rem;
+      font-size: $nav-toggle-size-lg;
     }
   }
 
@@ -81,10 +65,10 @@
   }
 
   &.navigation-shadow {
-    box-shadow: 0 0 $grid-gutter-width/2 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 $nav-shadow;
   }
 }
 
 .navbar-is-fixed {
-  padding-top: 56px;
+  padding-top: $nav-height;
 }

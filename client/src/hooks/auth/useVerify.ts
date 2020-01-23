@@ -1,7 +1,5 @@
-import { FormEvent } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import validator from "validator";
 
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";

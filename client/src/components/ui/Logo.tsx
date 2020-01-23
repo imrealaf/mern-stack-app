@@ -3,7 +3,6 @@ import React, { HTMLAttributes } from "react";
 
 import "./Logo.scss";
 
-import logo from "../../assets/logo.svg";
 import { dictionary } from "../../data";
 
 /**

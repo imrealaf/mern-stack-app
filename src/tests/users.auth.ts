@@ -19,18 +19,24 @@ let user: IUser;
 
 export default (app: Application) => {
   return describe("API: Users & Auth", () => {
+    /**
+     *  Before all: connect to DB and delete all previous collections
+     */
     beforeAll(async () => {
       await DbService.connect();
-      const collections = await mongoose.connection.db.collections();
-      for (const collection of collections) {
-        await collection.deleteOne(this);
-      }
+      await mongoose.connection.db.dropDatabase();
     });
 
+    /**
+     *  After all: close connection
+     */
     afterAll(async () => {
       mongoose.connection.close();
     });
 
+    /**
+     *  Create User
+     */
     describe("/api/users {POST} -> Create User", () => {
       it("1. Should fail because of missing required field", async () => {
         const res = await request(app)
@@ -42,7 +48,7 @@ export default (app: Application) => {
           .expect("Content-Type", /json/);
 
         expect(res.body.message).toBeDefined();
-        expect(res.body.message).toBe(message.get("auth_password_required"));
+        expect(res.body.message).toBe(message.get("users_name_required"));
       });
 
       it("2. Should create new user with verification token", async () => {
@@ -77,6 +83,9 @@ export default (app: Application) => {
       });
     });
 
+    /**
+     *  Resend verification
+     */
     describe("/auth/resend-verify {POST} -> Resend verification", () => {
       it("1. Should fail because of missing email field", async () => {
         const res = await request(app)
@@ -99,6 +108,9 @@ export default (app: Application) => {
       });
     });
 
+    /**
+     *  Verify user
+     */
     describe("/auth/verify {POST} -> Verify user", () => {
       it("1. Should fail because of missing token", async () => {
         const res = await request(app)
@@ -117,6 +129,9 @@ export default (app: Application) => {
       });
     });
 
+    /**
+     *  Login with email
+     */
     describe("/auth/email {POST} -> Login with email", () => {
       it("1. Should fail because of missing credentials", async () => {
         const res = await request(app)
@@ -140,6 +155,9 @@ export default (app: Application) => {
       });
     });
 
+    /**
+     *  Get current user
+     */
     describe("/auth {GET} -> Get current user", () => {
       it("1. Should fail 401 because of missing JWT", async () => {
         const res = await request(app)
@@ -161,6 +179,9 @@ export default (app: Application) => {
       });
     });
 
+    /**
+     *  Make user admin
+     */
     describe("/api/users/admin {PUT} -> Make user Admin", () => {
       it("1. Should fail from missing secret", async () => {
         const res = await request(app)

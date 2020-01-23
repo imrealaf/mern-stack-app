@@ -4,8 +4,13 @@
 
 @import "../../styles/vendor/bootstrap/utils.scss";
 
+$hero-padding: 6rem;
+$hero-overlay-bg: $black;
+$hero-overlay-opacity: 0.5;
+$hero-overlay-transition-duration: 0.5s;
+
 .hero {
-  padding: 6rem 0;
+  padding: $hero-padding 0;
   position: relative;
 
   .container {
@@ -24,9 +29,9 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: $black;
-    opacity: 0.5;
-    transition: all 0.5s ease;
+    background: $hero-overlay-bg;
+    opacity: $hero-overlay-opacity;
+    transition: $hero-overlay-transition-duration;
   }
 
   h1 {
@@ -43,7 +48,7 @@
   }
 
   &.has-vh {
-    padding: 3rem 0;
+    padding: $hero-padding/2 0;
     display: flex;
     align-items: center;
   }
@@ -53,7 +58,7 @@
     background-size: cover;
   }
 
-  &.hero-preload {
+  &.is-preload {
     .hero_overlay {
       opacity: 1 !important;
     }

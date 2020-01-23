@@ -1,0 +1,29 @@
+{
+  "AUTH_ERROR_INVALID_EMAIL": "Not a valid email",
+
+  "AUTH_LOGIN_EMAIL_PLACEHOLDER": "Enter your email",
+  "AUTH_LOGIN_PASSWORD_PLACEHOLDER": "Enter your password",
+  "AUTH_LOGIN_SUBMIT_TEXT": "Log In",
+  "AUTH_LOGIN_PENDING_TEXT": "Signing you in...",
+  "AUTH_LOGIN_NO_ACCOUNT_TEXT": "Dont't have an account?",
+  "AUTH_LOGIN_NO_ACCOUNT_LINK": "Sign Up",
+
+  "AUTH_LOGIN_RESEND_VERIFY_LINK": "Click here",
+  "AUTH_LOGIN_RESEND_VERIFY_TEXT": "to resend verification email",
+
+  "AUTH_RESEND_VERIFY_TEXT": "<p className=\"mb-1\">A new verification email has been sent!</p><p>Check your inbox and junk folder.</p>",
+  "AUTH_RESEND_VERIFY_BUTTON_TEXT": "Send Again",
+
+  "AUTH_LOGIN_SOCIAL_FAIL": "The email of the account you're trying to login with is already assigned to an account",
+
+  "AUTH_SIGNUP_NAME_PLACEHOLDER": "Enter your name",
+  "AUTH_SIGNUP_EMAIL_PLACEHOLDER": "Enter your email",
+  "AUTH_SIGNUP_PASSWORD_PLACEHOLDER": "Choose your password",
+  "AUTH_SIGNUP_PASSWORD_CONFIRM_PLACEHOLDER": "Confirm your password",
+  "AUTH_SIGNUP_PASSWORD_MIN": "Password must be at least {MIN_PASSWORD_LENGTH} characters",
+  "AUTH_SIGNUP_PASSWORD_MATCH": "Confirmed password must match the above",
+  "AUTH_SIGNUP_SUBMIT_TEXT": "Sign Up",
+  "AUTH_SIGNUP_PENDING_TEXT": "Signing you up...",
+  "AUTH_SIGNUP_HAS_ACCOUNT_TEXT": "Already have an account?",
+  "AUTH_SIGNUP_HAS_ACCOUNT_LINK": "Login"
+}
