@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import config from "../../constants/config";
 import * as routes from "../../constants/routes";
 import { dictionary } from "../../data";
 import { sanitize } from "../../utils";
@@ -62,7 +61,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
                 className="text-center"
                 type="text"
                 name="name"
-                placeholder="Enter your name"
+                placeholder={dictionary.AUTH_SIGNUP_NAME_PLACEHOLDER}
                 ref={refs.name}
                 onChange={signUp.onChangeHandler}
                 size="lg"
@@ -78,7 +77,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
               className="text-center"
               type="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder={dictionary.AUTH_SIGNUP_EMAIL_PLACEHOLDER}
               ref={refs.email}
               onChange={signUp.onChangeHandler}
               size="lg"
@@ -101,14 +100,14 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
                 className="text-center"
                 type="password"
                 name="password"
-                placeholder="Choose your password"
+                placeholder={dictionary.AUTH_SIGNUP_PASSWORD_PLACEHOLDER}
                 ref={refs.password}
                 onChange={signUp.onChangeHandler}
                 size="lg"
               />
               {signUp.passwordNotValid() ? (
                 <Form.Text className="text-secondary">
-                  {dictionary.AUTH_PASSWORD_MIN}
+                  {dictionary.AUTH_SIGNUP_PASSWORD_MIN}
                 </Form.Text>
               ) : null}
             </Form.Group>
@@ -122,14 +121,16 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
                 className="text-center"
                 type="password"
                 name="passwordConfirm"
-                placeholder="Confirm your password"
+                placeholder={
+                  dictionary.AUTH_SIGNUP_PASSWORD_CONFIRM_PLACEHOLDER
+                }
                 ref={refs.passwordConfirm}
                 onChange={signUp.onChangeHandler}
                 size="lg"
               />
               {signUp.passwordsDontMatch() ? (
                 <Form.Text className="text-secondary">
-                  {dictionary.AUTH_PASSWORD_MATCH}
+                  {dictionary.AUTH_SIGNUP_PASSWORD_MATCH}
                 </Form.Text>
               ) : null}
             </Form.Group>
@@ -144,7 +145,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
               type="submit"
               size="lg"
             >
-              <strong>Sign Up</strong>
+              <strong>{dictionary.AUTH_SIGNUP_SUBMIT_TEXT}</strong>
             </Button>
           ) : null}
 
@@ -158,9 +159,9 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
           {!signUp.data.name && !signUp.data.email && !signUp.data.password ? (
             <div className="mt-3">
               <small>
-                Already have an account?{" "}
+                {dictionary.AUTH_SIGNUP_HAS_ACCOUNT_TEXT}{" "}
                 <Link to={routes.LOGIN} className="text-dark">
-                  <strong>Login</strong>
+                  <strong>{dictionary.AUTH_SIGNUP_HAS_ACCOUNT_LINK}</strong>
                 </Link>
               </small>
             </div>
@@ -175,7 +176,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
       <Preloader
         show={signUp.pending}
         color="primary"
-        text="Signing you up.."
+        text={dictionary.AUTH_SIGNUP_PENDING_TEXT}
       />
     </React.Fragment>
   );

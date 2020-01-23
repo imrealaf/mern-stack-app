@@ -4,6 +4,8 @@ import { Button, Container, Navbar } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import "./AdminNavigation.scss";
+
 import { SideNav } from ".";
 import * as routes from "../../constants/routes";
 import { dictionary } from "../../data";
@@ -75,7 +77,7 @@ const AdminNavigationComponent: React.FC<INavigationProps> & {
             <strong>{dictionary.APP_NAME}</strong>
           </Link>
 
-          <a
+          <button
             className="nav-toggle nav-toggle-left text-white d-lg-none"
             onClick={mainPanel.toggle}
           >
@@ -84,9 +86,9 @@ const AdminNavigationComponent: React.FC<INavigationProps> & {
               icon={["fas", "bars"]}
               size="1x"
             />
-          </a>
+          </button>
 
-          <a
+          <button
             className="nav-toggle nav-toggle-right text-white"
             onClick={userPanel.toggle}
           >
@@ -95,7 +97,7 @@ const AdminNavigationComponent: React.FC<INavigationProps> & {
               icon={["fas", "user-cog"]}
               size="1x"
             />
-          </a>
+          </button>
         </Container>
       </Navbar>
 

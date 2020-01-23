@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 
+import { dictionary } from "../../data";
 import { sanitize } from "../../utils";
 import { Preloader } from "../ui";
 
@@ -67,13 +68,17 @@ const ResendVerifyForm: React.FC<IResendVerifyFormProps> = ({ resend }) => {
       ) : null}
       {resend.success && !resend.pending ? (
         <div className="py-5">
-          <p className="mb-1">A new verification email has been sent!</p>
-          <p>Check your inbox and junk folder.</p>
+          <div
+            dangerouslySetInnerHTML={sanitize(
+              dictionary.AUTH_RESEND_VERIFY_TEXT,
+              false
+            )}
+          />
           <button
             className="btn btn-pill btn-secondary btn-xs"
             onClick={resend.onSubmitHandler}
           >
-            Send Again
+            {dictionary.AUTH_RESEND_VERIFY_BUTTON_TEXT}
           </button>
         </div>
       ) : null}

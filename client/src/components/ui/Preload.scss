@@ -4,6 +4,8 @@
 
 @import "../../styles/vendor/bootstrap/utils.scss";
 
+$preload-transition-duration: 0.3s;
+
 .preload {
   display: flex;
   flex-direction: column;
@@ -15,5 +17,5 @@
   top: 0;
   left: 0;
   z-index: 99999;
-  transition: all 0.3s ease;
+  transition: all $preload-transition-duration ease;
 }

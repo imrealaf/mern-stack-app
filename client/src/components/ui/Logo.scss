@@ -4,6 +4,12 @@
 
 @import "../../styles/vendor/bootstrap/utils.scss";
 
+$logo-size-lg: 2em;
+$logo-size-xl: 4em;
+$logo-text-margin: 0.5rem;
+$logo-text-font: "Josefin Sans", sans-serif;
+$logo-text-font-weight: bold;
+
 .logo {
   display: inline-flex;
   width: auto;
@@ -12,20 +18,20 @@
   span {
     position: relative;
     top: 2px;
-    margin-left: 0.5rem;
-    font-weight: bold;
-    font-family: "Josefin Sans";
+    margin-left: $logo-text-margin;
+    font-weight: $logo-text-font-weight;
+    font-family: $logo-text-font;
   }
 
   &.logo-lg {
     svg {
-      font-size: 2em;
+      font-size: $logo-size-lg;
     }
   }
 
   &.logo-xl {
     svg {
-      font-size: 4em;
+      font-size: $logo-size-xl;
     }
   }
 }

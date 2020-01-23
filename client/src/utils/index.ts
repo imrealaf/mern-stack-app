@@ -2,7 +2,6 @@ import moment, { Moment } from "moment";
 import sanitizeHtml from "sanitize-html";
 
 import config from "../constants/config";
-import * as routes from "../constants/routes";
 import { buildDictionary } from "../utils/dictionary";
 
 export const getCurrentRoute = (
@@ -122,12 +121,6 @@ export const interpolate = (
     }
   }
 
-  return output;
-};
-
-export const parseConfigValues = (str: string) => {
-  let output = str;
-  output = interpolate(str, "{", "}", config);
   return output;
 };
 

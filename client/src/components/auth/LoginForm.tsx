@@ -54,9 +54,9 @@ const LoginForm: React.FC<ILoginFormProps> & {
             {login.getError().message.search("verify") > -1 ? (
               <span className="d-block mt-1">
                 <Link className="text-danger" to={routes.RESEND_VERIFY}>
-                  <strong>Click here</strong>
+                  <strong>{dictionary.AUTH_LOGIN_RESEND_VERIFY_LINK}</strong>
                 </Link>{" "}
-                to resend verification email
+                {dictionary.AUTH_LOGIN_RESEND_VERIFY_TEXT}
               </span>
             ) : null}
           </Form.Text>
@@ -67,8 +67,7 @@ const LoginForm: React.FC<ILoginFormProps> & {
         providerAuthSuccess === "fail" &&
         !login.data.email ? (
           <Form.Text className="text-center text-danger mb-3">
-            The email of the account you're trying to login with is already
-            assigned to an account
+            {dictionary.AUTH_LOGIN_SOCIAL_FAIL}
           </Form.Text>
         ) : null}
 
@@ -78,7 +77,7 @@ const LoginForm: React.FC<ILoginFormProps> & {
             className="text-center"
             type="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder={dictionary.AUTH_LOGIN_EMAIL_PLACEHOLDER}
             onChange={login.onChangeHandler}
             size="lg"
           />
@@ -91,7 +90,7 @@ const LoginForm: React.FC<ILoginFormProps> & {
               className="text-center"
               type="password"
               name="password"
-              placeholder="Enter your password"
+              placeholder={dictionary.AUTH_LOGIN_PASSWORD_PLACEHOLDER}
               onChange={login.onChangeHandler}
               size="lg"
             />
@@ -107,7 +106,7 @@ const LoginForm: React.FC<ILoginFormProps> & {
             size="lg"
             type="submit"
           >
-            <strong>Log In</strong>
+            <strong>{dictionary.AUTH_LOGIN_SUBMIT_TEXT}</strong>
           </Button>
         ) : null}
 
@@ -116,15 +115,19 @@ const LoginForm: React.FC<ILoginFormProps> & {
         {!login.data.email ? (
           <div className="mt-3">
             <small>
-              Don't have an account?{" "}
+              {dictionary.AUTH_LOGIN_NO_ACCOUNT_TEXT}{" "}
               <Link to={routes.SIGN_UP} className="text-dark">
-                <strong>Sign Up</strong>
+                <strong>{dictionary.AUTH_LOGIN_NO_ACCOUNT_LINK}</strong>
               </Link>
             </small>
           </div>
         ) : null}
       </Form>
-      <Preloader show={login.pending} color="primary" text="Signing you in.." />
+      <Preloader
+        show={login.pending}
+        color="primary"
+        text={dictionary.AUTH_LOGIN_PENDING_TEXT}
+      />
     </React.Fragment>
   );
 };

@@ -11,8 +11,6 @@ import { sanitize } from "../../../utils";
 import { IPageProps, Page } from "../../hoc/Page";
 import { Hero } from "../../ui";
 
-import heroImage from "../../../assets/landing.jpg";
-
 const Landing: React.FC<IPageProps> = ({ isAuthenticated }) => {
   /**
    *  Redirect if not authenticated
@@ -27,7 +25,7 @@ const Landing: React.FC<IPageProps> = ({ isAuthenticated }) => {
   return (
     <Page description="This is the home page">
       {/* Hero */}
-      <Hero image="/images/landing.jpg" vh={100} overlay={true} overlayOpacity={0.7}>
+      <Hero image={data.image} vh={100} overlay={true} overlayOpacity={0.7}>
         <div className="text-center text-white">
           <h1
             className="display-3"

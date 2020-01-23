@@ -16,25 +16,59 @@ const compName = "hero";
 export interface IHeroProps {
   bg: ThemeColor;
   text: ThemeColor;
-  image?: string | undefined;
+  image?: string;
   vh?: 25 | 50 | 75 | 100;
   fluid: boolean;
   overlay: boolean;
   overlayOpacity: number;
+  preload: boolean;
 }
 
 export const Hero: React.FC<IHeroProps> & {
   defaultProps: Partial<IHeroProps>;
-} = ({ children, bg, vh, image, fluid, text, overlay, overlayOpacity }) => {
+} = ({
+  children,
+  bg,
+  vh,
+  image,
+  preload,
+  fluid,
+  text,
+  overlay,
+  overlayOpacity
+}) => {
+  /**
+   *  Element ref
+   */
   const ref = useRef() as any;
 
+  /**
+   *  On mount, preload image if set
+   */
   useEffect(() => {
-    if (image) {
-      setTimeout(() => {
-        ref.current.classList.remove("hero-preload");
-      }, 100);
+    if (image && preload) {
+      initImageLoad();
     }
   }, []);
+
+  /**
+   *  Init image preloading
+   */
+  const initImageLoad = () => {
+    if (!image) return;
+    const preloadImage = new Image();
+    preloadImage.onload = onImageLoad;
+    preloadImage.src = image;
+  };
+
+  /**
+   *  On image loaded
+   */
+  const onImageLoad = () => {
+    setTimeout(() => {
+      ref.current.classList.remove("is-preload");
+    }, 100);
+  };
 
   /**
    *  Class name generation
@@ -42,7 +76,10 @@ export const Hero: React.FC<IHeroProps> & {
   const className = (): string => {
     const classes = [compName, `bg-${bg}`, `text-${text}`];
     if (vh) classes.push("has-vh");
-    if (image) classes.push("has-image hero-preload");
+    if (image) {
+      classes.push("has-image");
+      if (preload) classes.push("is-preload");
+    }
     return classes.join(" ");
   };
 
@@ -82,5 +119,6 @@ Hero.defaultProps = {
   text: "dark",
   fluid: false,
   overlay: false,
-  overlayOpacity: 0.5
+  overlayOpacity: 0.5,
+  preload: true
 };

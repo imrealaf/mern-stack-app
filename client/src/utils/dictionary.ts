@@ -1,15 +1,23 @@
+import config from "../constants/config";
 import * as routes from "../constants/routes";
-import data from "../data/global/dictionary.json";
-import { parseConfigValues } from "../utils";
+import { interpolate } from "../utils";
 
-export const getDictionary = () => {
-  return { ...routes, ...data } as any;
+import auth from "../data/dictionary/auth.dictionary.json";
+import global from "../data/dictionary/global.dictionary.json";
+
+export const parseConfigValues = (str: string) => {
+  let output = str;
+  output = interpolate(str, "{", "}", config);
+  return output;
 };
 
-export const buildDictionary = () => {
-  const src = getDictionary();
-  const dist = {} as any;
+export const buildDictionary = (isAdmin: boolean = false) => {
+  const src: any = isAdmin
+    ? { ...routes, ...global, ...auth }
+    : { ...routes, ...global, ...auth };
+  const dist: any = {};
 
+  // Loop through all definitions and parse config values
   for (const key in src) {
     if (src.hasOwnProperty(key)) {
       let def = src[key];
