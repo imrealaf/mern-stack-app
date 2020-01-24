@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
 import { userActions } from "../../modules/user";
-import { sendRequest } from "../../utils/http";
+import { requestError, sendRequest } from "../../utils/http";
 
 /**
  *  Hook api interface
@@ -13,7 +13,7 @@ export interface IUseVerify {
   pending: boolean;
   isVerified: boolean;
   message: string;
-  error: string | null;
+  error: any;
 }
 
 export default (token: string | undefined): IUseVerify => {
@@ -59,9 +59,9 @@ export default (token: string | undefined): IUseVerify => {
       dispatch(userActions.verifySuccess());
       setMessage(response.data.message);
       setIsVerified(true);
-    } catch (error) {
+    } catch (err) {
       setPending(false);
-      setError(error.response.data.message);
+      setError(requestError(err));
       dispatch(userActions.verifyFail());
     }
   };

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
 import * as routes from "../../../constants/routes";
+import { dictionary } from "../../../data";
 import { useSignUp } from "../../../hooks";
 import { SignUpForm } from "../../auth";
 import { IPageProps, Page } from "../../hoc/Page";
@@ -23,7 +24,7 @@ const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
   }
 
   return (
-    <Page title="Sign Up" classes={["is-auth-page"]}>
+    <Page title={dictionary.AUTH_SIGNUP_TITLE} classes={["is-auth-page"]}>
       <Container className="text-center py-2">
         <Row className="mt-4">
           <Col
@@ -34,7 +35,7 @@ const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
             <h4 className="mb-4 text-primary">
               <Logo color="dark" />
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
-                Sign Up
+                {dictionary.AUTH_SIGNUP_TITLE}
               </small>
             </h4>
             <Card>
@@ -44,8 +45,8 @@ const SignUp: React.FC<IPageProps> = ({ isAuthenticated }) => {
             </Card>
             {!signUp.pending ? (
               <div className="mt-3 pb-4">
-                <Link to={routes.LANDING}>
-                  <small>Back to site</small>
+                <Link to={routes.LANDING} className="text-secondary">
+                  <small>{dictionary.AUTH_BACK}</small>
                 </Link>
               </div>
             ) : null}

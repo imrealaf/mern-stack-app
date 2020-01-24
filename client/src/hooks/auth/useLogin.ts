@@ -6,7 +6,7 @@ import validator from "validator";
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
 import { userActions } from "../../modules/user";
-import { sendRequest } from "../../utils/http";
+import { requestError, sendRequest } from "../../utils/http";
 
 /**
  *  State interface
@@ -21,7 +21,7 @@ export interface ILoginState {
  */
 export interface IUseLogin {
   data: ILoginState;
-  errors: any;
+  error: any;
   valid: boolean;
   pending: boolean;
   submitted: boolean;
@@ -54,7 +54,7 @@ export const useLogin = (): IUseLogin => {
    *  Create state
    */
   const [data, setData] = useState(initialState);
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState(null);
   const [valid, setValid] = useState(false);
   const [pending, setPending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -77,7 +77,7 @@ export const useLogin = (): IUseLogin => {
     const target = e.target as HTMLFormElement;
     setData({ ...data, [target.name]: target.value.trim() });
     if (hasError() && submitted) {
-      setErrors([]);
+      setError(null);
     }
   };
 
@@ -116,13 +116,9 @@ export const useLogin = (): IUseLogin => {
       dispatch(userActions.doLogin(response.data));
 
       // Login fail ..
-    } catch (error) {
-      // Get and log errors
-      const err: any = [error.response.data];
-
-      // Set and dispatch errors
+    } catch (err) {
       setPending(false);
-      setErrors(err);
+      setError(requestError(err));
       dispatch(userActions.loginFail());
     }
   };
@@ -143,12 +139,18 @@ export const useLogin = (): IUseLogin => {
       : false;
   };
 
+  /**
+   * Has error
+   */
   const hasError = () => {
-    return errors.length > 0;
+    return error !== null ? true : false;
   };
 
+  /**
+   * Get error
+   */
   const getError = () => {
-    return errors[0];
+    return error;
   };
 
   /**
@@ -156,7 +158,7 @@ export const useLogin = (): IUseLogin => {
    */
   return {
     data,
-    errors,
+    error,
     valid,
     pending,
     submitted,

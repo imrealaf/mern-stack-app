@@ -2,7 +2,7 @@ const NAMESPACE = "msb";
 
 export default {
   NAMESPACE,
-  META_TITLE_SEPERATOR: "-",
+  META_TITLE_SEPERATOR: "|",
   PRELOAD_TIME: 1500,
   TOKEN_STORAGE_NAME: `${NAMESPACE}_token`,
   HTTP_DELAY: 2000,
@@ -12,5 +12,6 @@ export default {
     },
     allowProtocolRelative: true
   },
-  MIN_PASSWORD_LENGTH: 6
+  MIN_PASSWORD_LENGTH: 6,
+  YEAR: new Date().getFullYear()
 };

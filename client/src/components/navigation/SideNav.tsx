@@ -3,6 +3,7 @@ import { Col, Nav, Row } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 
 import defaultPhoto from "../../assets/default-profile-photo.png";
+import { dictionary } from "../../data";
 import { IUser } from "../../modules/user";
 import { interpolate } from "../../utils";
 import { ISidePanelProps, SidePanel } from "../ui/SidePanel";
@@ -97,6 +98,9 @@ const SideNavComponent: React.FC<ISideNavProps> & {
       {bottomItems.length ? (
         <div className="sidepanel_bottom">
           <Nav className="d-block">{getBottomItems()}</Nav>
+          <p className="text-xs mt-3 text-black">
+            &copy; {dictionary.APP_NAME} {new Date().getFullYear()}
+          </p>
         </div>
       ) : null}
     </SidePanel>

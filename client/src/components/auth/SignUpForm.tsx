@@ -87,7 +87,7 @@ const SignUpForm: React.FC<ISignUpFormProps> = ({ signUp }) => {
                 {signUp.getError("email").message}
               </Form.Text>
             ) : null}
-            {signUp.data.email.length > 3 ? (
+            {signUp.data.email.length > 3 && !signUp.submitted ? (
               <Form.Text>This will be your username</Form.Text>
             ) : null}
           </Form.Group>

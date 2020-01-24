@@ -5,7 +5,7 @@ import validator from "validator";
 import config from "../../constants/config";
 import * as routes from "../../constants/routes";
 import { userActions } from "../../modules/user";
-import { sendRequest } from "../../utils/http";
+import { requestError, sendRequest } from "../../utils/http";
 
 /**
  *  State interface
@@ -22,7 +22,7 @@ export interface ISignUpState {
  */
 export interface IUseSignUp {
   data: ISignUpState;
-  errors: any;
+  error: any;
   valid: boolean;
   pending: boolean;
   submitted: boolean;
@@ -59,6 +59,7 @@ export const useSignUp = (): IUseSignUp => {
    */
   const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState([]) as any;
+  const [error, setError] = useState(null) as any;
   const [valid, setValid] = useState(false);
   const [pending, setPending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -104,20 +105,26 @@ export const useSignUp = (): IUseSignUp => {
   /**
    *  Has error function
    */
-  const hasError = (name: string) => {
-    if (errors.length > 0) {
-      const error = errors.filter((err: any) => err.param === name);
-      return error.length === 1 ? true : false;
-    } else {
-      return false;
+  const hasError = (name: string = "") => {
+    const isError = error !== null;
+
+    if (name) {
+      return (
+        isError &&
+        typeof error.name !== undefined &&
+        error.name &&
+        error.name === name
+      );
     }
+
+    return isError;
   };
 
   /**
    *  Get error function
    */
-  const getError = (name: string) => {
-    return errors.filter((err: any) => err.param === name)[0];
+  const getError = () => {
+    return hasError() ? error : null;
   };
 
   /**
@@ -126,8 +133,8 @@ export const useSignUp = (): IUseSignUp => {
   const onChangeHandler = (e: FormEvent) => {
     const target = e.target as HTMLFormElement;
     setData({ ...data, [target.name]: target.value.trim() });
-    if (hasError(target.name) && submitted) {
-      setErrors([]);
+    if (hasError() && submitted) {
+      setError(null);
     }
   };
 
@@ -175,10 +182,9 @@ export const useSignUp = (): IUseSignUp => {
           })
         );
       }
-    } catch (error) {
-      const err = [error.response.data];
+    } catch (err) {
       setPending(false);
-      setErrors(err);
+      setError(requestError(err));
       dispatch(userActions.signUpFail());
     }
   };
@@ -188,7 +194,7 @@ export const useSignUp = (): IUseSignUp => {
    */
   return {
     data,
-    errors,
+    error,
     valid,
     pending,
     submitted,

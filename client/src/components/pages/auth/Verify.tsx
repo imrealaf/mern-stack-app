@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { Link, Redirect, useParams } from "react-router-dom";
 
 import * as routes from "../../../constants/routes";
+import { dictionary } from "../../../data";
 import { useVerify } from "../../../hooks";
+import { sanitize } from "../../../utils";
 import { IPageProps, Page } from "../../hoc/Page";
 import { Logo, Preloader } from "../../ui";
 
@@ -30,7 +32,7 @@ const Verify: React.FC<IPageProps> = ({ isAuthenticated }) => {
    *  Render
    */
   return (
-    <Page title="Verify" classes={["is-auth-page"]}>
+    <Page title={dictionary.AUTH_VERIFY_TITLE} classes={["is-auth-page"]}>
       <Container className="text-center py-4">
         <Row className="mt-4">
           <Col
@@ -41,7 +43,7 @@ const Verify: React.FC<IPageProps> = ({ isAuthenticated }) => {
             <h4 className="mb-4 text-primary">
               <Logo color="dark" />
               <small className="d-block text-secondary text-upper text-spaced text-sm mt-2">
-                Verify You Account
+                {dictionary.AUTH_VERIFY_TITLE}
               </small>
             </h4>
             <Card>
@@ -51,24 +53,29 @@ const Verify: React.FC<IPageProps> = ({ isAuthenticated }) => {
                     <Preloader
                       show={true}
                       color="primary"
-                      text="Verifying your account.."
+                      text={dictionary.AUTH_VERIFY_PENDING_TEXT}
                     />
                   </div>
                 ) : (
                   <React.Fragment>
                     {verify.isVerified ? (
                       <p className="py-5">
-                        <strong>Success!</strong> Your account has been verified
-                        <br />
-                        You can now{" "}
+                        <span
+                          dangerouslySetInnerHTML={sanitize(
+                            dictionary.AUTH_VERIFY_SUCCESS
+                          )}
+                        />{" "}
                         <Link to={routes.LOGIN}>
-                          <strong>click here</strong>
+                          <strong
+                            dangerouslySetInnerHTML={sanitize(
+                              dictionary.AUTH_VERIFY_SUCCESS_LINK
+                            )}
+                          />
                         </Link>{" "}
-                        to login
                       </p>
                     ) : null}
                     {verify.error ? (
-                      <p className="py-5">{verify.error}</p>
+                      <p className="py-5">{verify.error.message}</p>
                     ) : null}
                   </React.Fragment>
                 )}
@@ -76,8 +83,8 @@ const Verify: React.FC<IPageProps> = ({ isAuthenticated }) => {
             </Card>
             {!verify.pending ? (
               <div className="mt-3">
-                <Link to={routes.LANDING}>
-                  <small>Back to site</small>
+                <Link to={routes.LANDING} className="text-secondary">
+                  <small>{dictionary.AUTH_BACK}</small>
                 </Link>
               </div>
             ) : null}

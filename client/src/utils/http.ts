@@ -47,3 +47,13 @@ export const deleteHeader = (key: string): void => {
     delete axios.defaults.headers.common[key];
   }
 };
+
+/**
+ *  Request error
+ */
+export const requestError = (error: any) => {
+  return Object.prototype.toString.call(error.response.data) ===
+    "[object String]"
+    ? { message: error.response.data }
+    : error.response.data;
+};
